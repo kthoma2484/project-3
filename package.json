@@ -1,21 +1,32 @@
 {
-  "name": "project-3",
-  "version": "0.1.0",
-  "private": true,
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "Mern Demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
+  },
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
     "emotion": "^9.2.10",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "express": "^4.15.4",
+    "if-env": "^1.0.4",
+    "react-bootstrap": "^0.32.4",
     "react-emotion": "^9.2.10",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
-    "webfontloader": "^1.6.28",
-    "yarn": "^1.10.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "webfontloader": "^1.6.28"
   }
 }
