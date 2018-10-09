@@ -24,7 +24,7 @@ class Login extends Component {
       }
     }
     
-    handleClick(event) {
+    handleSubmit(event) {
         var apiBaseUrl = "http://localhost:4000/api/";
         // var self = this;
         var payload={
@@ -76,7 +76,7 @@ class Login extends Component {
                    onChange = {(event,newValue) => this.setState({password:newValue})}
                    />
                  <br/>
-                 <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+                 <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleSubmit(event)}/>
              </div>
              </MuiThemeProvider>
              </LoginWrapper>
