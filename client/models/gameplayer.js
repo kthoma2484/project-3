@@ -1,19 +1,19 @@
 module.exports = function(sequelize, DataTypes) {
     var Gameplayer = sequelize.define("Gameplayer", {
       gameplayerid: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
       playerid: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       gameid: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
-      createdAt: Sequelize.DATE, 
+      createdAt: DataTypes.DATE, 
     },);
     return Gameplayer;
   };

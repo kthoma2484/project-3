@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Game = sequelize.define("Game", {
       gameid: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
         },
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
           max: 4
         }
       },
-      createdAt: Sequelize.DATE, 
+      createdAt: DataTypes.DATE, 
     },);
     return Game;
   };
