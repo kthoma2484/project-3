@@ -26,13 +26,12 @@ class Register extends Component {
   }
 
   handleClick(event){
-    var apiBaseUrl = "http://localhost:3306/api";
-    console.log("values",this.state.first_name,this.state.last_name,this.state.email,this.state.password);
+    var apiBaseUrl = "http://localhost:3001/api";
+    console.log("values",this.state.username,this.state.email,this.state.password);
     //To be done:check for empty values before hitting submit
     var self = this;
     var payload={
-    "first_name": this.state.first_name,
-    "last_name":this.state.last_name,
+    "username": this.state.username,
     "email":this.state.email,
     "password":this.state.password
     }
@@ -66,15 +65,9 @@ class Register extends Component {
               Register
             </h4>
            <TextField
-             hintText="Enter your First Name"
-             floatingLabelText="First Name"
-             onChange = {(event,newValue) => this.setState({first_name:newValue})}
-             />
-           <br/>
-           <TextField
-             hintText="Enter your Last Name"
-             floatingLabelText="Last Name"
-             onChange = {(event,newValue) => this.setState({last_name:newValue})}
+             hintText="Create a Username"
+             floatingLabelText="Userame"
+             onChange = {(event,newValue) => this.setState({username:newValue})}
              />
            <br/>
            <TextField

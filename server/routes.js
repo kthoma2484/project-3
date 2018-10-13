@@ -11,9 +11,14 @@ module.exports = function(app, passport) {
   // Profile Page =====================
   // Protected so you have to be logged in to visit
   // Use route middleware to verify this (the isLoggedIn function)
-  app.get('/userprofile', isLoggedIn, function(req, res) {
-      res.render('userprofile.js', {
-          user : req.username // get the user out of session and pass to template
+  app.post('/api/login', isLoggedIn, function(req, res) {
+      db.Player.findOne({
+      where: {
+        username: req.body.username,
+        password: req.body.password
+    }})
+      .then(function(dbPlayer) {
+        res.render(dbPlayer);
       });
   });
 
@@ -45,7 +50,7 @@ module.exports = function(app, passport) {
 
 
 
-// route middleware to make sure a user is logged in
+// route middleware to make sure a player is logged in
 function isLoggedIn(req, res, next) {
 
   // if user is authenticated in the session, carry on 

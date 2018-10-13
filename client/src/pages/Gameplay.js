@@ -29,7 +29,7 @@ class Gameplay extends Component {
 
     componentWillMount(){
         var loginPage =[];
-        loginPage.push(<LoginScreen parentContext={this}/>);
+        loginPage.push(<LoginScreen key={Date.now()} parentContext={this}/>);
         this.setState({
             loginPage:loginPage
             })
