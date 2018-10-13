@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
-          len: [1],
           min: 5,
           max: 15
         }
@@ -18,15 +18,21 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [1]
+          min: {
+            args: 6,
+            msg: "Password must be more than 6 characters"
+          }
         }
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
-            len: [1],
-            min: 15,
+            isEmail: {
+            args: true,
+            msg: "Email is not valid"
+          }
         } 
       },
       singlescore: {

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -11,8 +12,16 @@ const session = require('express-session');
 // Requiring our models for syncing
 var db = require("./server/models");
 
+//Sync Database
+db.sequelize.sync().then(function() {
+  console.log('Nice! Database looks fine')
+}).catch(function(err) {
+  console.log(err, "Something went wrong with the Database Update!")
+});
+
+
 // pass passport for configuration
-//require('./config/passport')(passport); 
+require('./server/config/passport')(passport); 
 
 // Set up express application
 app.use(cookieParser()); //read cookies (needed for auth)
@@ -31,7 +40,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-require("./server/API-db.js")(app, passport); // load our routes and pass in our app and fully configured passport
+require("./server/routes.js")(app, passport); // load our routes and pass in our app and fully configured passport
 
 // Send every other request to the React app
 // Define any API routes before this runs
