@@ -24,7 +24,7 @@ class Login extends Component {
     }
     
     handleSubmit(event) {
-        var apiBaseUrl = "http://localhost:3001/api/";
+        var apiBaseUrl = "http://localhost:3000/api/";
         // var self = this;
         var payload={
         "username":this.state.username,

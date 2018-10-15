@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // http://stackoverflow.com/a/34015469/988941
 import styled from 'react-emotion';
 // import Game from "../components/Game";
-import LoginScreen from "../components/LoginRegister/LoginScreen";
+import RegLoginScreen from "../components/LoginRegister/RegLoginScreen";
 
 
 // injectTapEventPlugin();
@@ -29,7 +29,7 @@ class Gameplay extends Component {
 
     componentWillMount(){
         var loginPage =[];
-        loginPage.push(<LoginScreen key={Date.now()} parentContext={this}/>);
+        loginPage.push(<RegLoginScreen key={Date.now()} parentContext={this}/>);
         this.setState({
             loginPage:loginPage
             })
@@ -40,7 +40,6 @@ class Gameplay extends Component {
             <GamePlayWrapper>
                 <div className="App">
                     {this.state.loginPage}
-                    {this.state.uploadScreen}
                 </div>
           </GamePlayWrapper>
         );

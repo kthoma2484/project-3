@@ -1,55 +1,59 @@
 import React, { Component } from "react";
-import Categories from "./Categories";
-// import TriviaSearch from "./TriviaSearch";
-import API from "../utils/API";
+import SingleTriviaSearch from "./SingleTriviaSearch";
+import MultiTriviaSearch from "./MultiTriviaSearch";
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
+
+const showMode = function(value) {
+  if (value === 'default') {
+    console.log("No mode choosen");
+  };
+  if (value === 'singleMode') {
+    console.log("You chose single mode");
+  };
+  if (value === 'multiMode') {
+    console.log("You chose multiplayer mode");
+  };
+};
 
 class Game extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'default'};
 
-  state = {
-    // search: "",
-    results: []
+    this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   };
 
-  // When this component mounts, search the trivia categories
-  componentDidMount = () => {
-    this.searchCategories();
-  }
-
-  searchCategories = () => {
-    API.getCategories("_category.php/")
-      .then(res => this.setState({ results: res.data.trivia_categories}))
-      .catch(err => console.log(err));
+  handleChange(event) {
+    var result = event.target.value;
+    console.log(result);
+    this.setState({value: event.target.value})
+    showMode(result);
   };
-
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchCategories(this.state.search);
-  };
- 
-  componentDidUpdate = () => {
-    console.log(this.state);
-  }
 
   render() {
+    console.log("this is rendered.")
     return (
       <div>
-        {/* <TriviaSearch
-          search={this.state.search}
-          handleFormSubmit={this.handleFormSubmit}
-          handleInputChange={this.handleInputChange}
-        /> */}      
-        <Categories results={this.state.results} /> 
+      <form onSubmit={this.handleSubmit}>
+        <label style={formStyle}>
+          <h4 style={formStyle}>Select your game mode and options.</h4>
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value='default'>Choose Your Mode:</option>
+            <option value='singleMode'>Single Player Mode</option>
+            <option value='multiMode'>Multi-Player Mode</option>
+          </select>
+          <SingleTriviaSearch /> 
+          <MultiTriviaSearch /> 
+        </label>
+      </form>
       </div>
-
     );
   }
 }

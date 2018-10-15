@@ -12,7 +12,7 @@ const LoginScreenWrapper = styled('div')({
   margin: 30,
 })
 
-class LoginScreen extends Component {
+class RegLoginScreen extends Component {
 
   constructor(props){
     super(props);
@@ -85,4 +85,4 @@ const style = {
   margin: 15,
 };
 
-export default LoginScreen;
+export default RegLoginScreen;

@@ -18,15 +18,14 @@ class Register extends Component {
   constructor(props){
     super(props);
     this.state={
-      first_name:'',
-      last_name:'',
+      username:'',
       email:'',
       password:''
     }
   }
 
   handleClick(event){
-    var apiBaseUrl = "http://localhost:3001/api";
+    var apiBaseUrl = "http://localhost:3000/api";
     console.log("values",this.state.username,this.state.email,this.state.password);
     //To be done:check for empty values before hitting submit
     var self = this;

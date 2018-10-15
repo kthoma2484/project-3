@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import styled from 'react-emotion'
+import styled from 'react-emotion';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
 
-import Header from './components/Header'
-import Welcome from './pages/Welcome'
-import Instructions from './pages/Instructions'
-import Gameplay from './pages/Gameplay'
-import Highscore from './pages/Highscore'
+import Header from './components/Header';
+import Welcome from './pages/Welcome';
+import Instructions from './pages/Instructions';
+import Gameplay from './pages/Gameplay';
+import Highscore from './pages/Highscore';
+import Userprofile from './pages/Userprofile';
+
 
 const Logo = styled('div')({
   fontSize: '40px',
@@ -41,6 +43,7 @@ class App extends Component {
               <Route path="/instructions" component={Instructions} />
               <Route path="/gameplay" component={Gameplay} />
               <Route path="/highscore" component={Highscore} />
+              <Route path="/userprofile" component={Userprofile} />
             </Switch>
           </Content>
         </div>

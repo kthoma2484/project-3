@@ -1,56 +1,66 @@
-// Dependencies
-// =============================================================
-
-// Requiring our Todo model
-var db = require("./models");
-
-// Routes
-// =============================================================
 module.exports = function(app, passport) {
 
-  // Profile Page =====================
-  // Protected so you have to be logged in to visit
-  // Use route middleware to verify this (the isLoggedIn function)
-  app.post('/api/login', isLoggedIn, function(req, res) {
-      db.Player.findOne({
-      where: {
-        username: req.body.username,
-        password: req.body.password
-    }})
-      .then(function(dbPlayer) {
-        res.render(dbPlayer);
+  // =====================================
+  // HOME PAGE (with login links) ========
+  // =====================================
+  app.get('/gameplay', function(req, res) {
+      res.render('gameplay.js'); // load the index.ejs file
+  });
+
+  // =====================================
+  // LOGIN ===============================
+  // =====================================
+  // show the login form
+  // app.get('/login', function(req, res) {
+
+  //     // render the page and pass in any flash data if it exists
+  //     res.render('login.ejs', { message: req.flash('loginMessage') }); 
+  // });
+
+  // process the login form
+  // app.post('/login', do all our passport stuff here);
+
+  // =====================================
+  // SIGNUP ==============================
+  // =====================================
+  // show the signup form
+  // app.get('/signup', function(req, res) {
+
+  // render the page and pass in any flash data if it exists
+  //     res.render('signup.ejs', { message: req.flash('signupMessage') });
+  // });
+
+  // process the signup form
+  // app.post('/signup', do all our passport stuff here);
+
+  // =====================================
+  // PROFILE SECTION =====================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  app.get('/userprofile', isLoggedIn, function(req, res) {
+      res.render('Userprofile.js', {
+          username : req.username // get the player out of session and pass to template
       });
   });
 
-  app.post("/api/register", function(req, res) {
-    db.Player.create(req.body).then(function(dbPlayer) {
-      res.json(dbPlayer);
-    });
-  });
-
-
   // process the registration form
-//   app.post('/api/register', passport.authenticate('local-registration', {
-//     successRedirect : '/profile', // redirect to the secure profile section
-//     failureRedirect : '/gameplay', // redirect back to the signup page if there is an error
-//     failureFlash : true // allow flash messages
-//   }));
+  app.post('/api/register', passport.authenticate('local-register', {
+    successRedirect : '/userprofile', // redirect to the secure profile section
+    failureRedirect : '/gameplay', // redirect back to the gameplay page if there is an error
+    failureFlash : true // allow flash messages
+  }));
 
-
-
-
-  // Logout Page ==============================
+  // =====================================
+  // LOGOUT ==============================
   // =====================================
   app.get('/logout', function(req, res) {
       req.logout();
       res.redirect('/');
   });
+};
 
-
-
-
-
-// route middleware to make sure a player is logged in
+// route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
   // if user is authenticated in the session, carry on 
@@ -62,8 +72,80 @@ function isLoggedIn(req, res, next) {
 }
 
 
+// Dependencies
+// =============================================================
+
+// Requiring our Todo model
+//var db = require("./models");
+
+// Routes
+// =============================================================
+// module.exports = function(app, passport) {
+
+//   // Profile Page =====================
+//   // Protected so you have to be logged in to visit
+//   // Use route middleware to verify this (the isLoggedIn function)
+//   app.post('/api/login', isLoggedIn, function(req, res) {
+//       db.Player.findOne({
+//       where: {
+//         username: req.body.username,
+//         password: req.body.password
+//     }})
+//       .then(function(dbPlayer) {
+//         res.render(dbPlayer);
+//       });
+//   });
+
+// //   app.post("/api/register", function(req, res) {
+// //     db.Player.findOne({
+// //       where: {
+// //         username: req.body.username,
+// //         password: req.body.password
+// //       }
+// //     })
+// //     .then(function(){
+// //     db.Player.create(req.body).then(function(dbPlayer) {
+// //       res.json(dbPlayer);
+// //     });
+// //   });
+// // });
 
 
+//   // process the registration form
+//   app.post('/api/register', passport.authenticate('local-registration', {
+//     successRedirect : '/userprofile', // redirect to the secure profile section
+//     failureRedirect : '/gameplay', // redirect back to the signup page if there is an error
+//     failureFlash : true // allow flash messages
+//   }));
+
+
+
+
+//   // Logout Page ==============================
+//   // =====================================
+//   app.get('/logout', function(req, res) {
+//       req.logout();
+//       res.redirect('/');
+//   });
+
+
+
+
+
+// // route middleware to make sure a player is logged in
+// function isLoggedIn(req, res, next) {
+
+//   // if user is authenticated in the session, carry on 
+//   if (req.isAuthenticated())
+//       return next();
+
+//   // if they aren't redirect them to the home page
+//   res.redirect('/');
+// }
+
+//}
+
+//----------------------------------------------------------------------
 
 // ROUTES FOR PLAYER DB
 
@@ -152,4 +234,4 @@ function isLoggedIn(req, res, next) {
 // });
 
 
-};
+
