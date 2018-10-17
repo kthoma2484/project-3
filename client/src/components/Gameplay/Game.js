@@ -9,32 +9,37 @@ const formStyle = {
   justifyContent: 'center'
 };
 
-const showMode = function(value) {
-  if (value === 'default') {
-    console.log("No mode choosen");
-  };
-  if (value === 'singleMode') {
-    console.log("You chose single mode");
-  };
-  if (value === 'multiMode') {
-    console.log("You chose multiplayer mode");
-  };
-};
-
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'default'};
+    this.state = {
+      value: 'default'
+    };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   };
 
-  handleChange(event) {
+  
+  showMode = value => {
+    if (value === 'default') {
+      console.log("No mode choosen");
+    };
+    if (value === 'singleMode') {
+      console.log("You chose single mode");
+      return <SingleTriviaSearch />
+    };
+    if (value === 'multiMode') {
+      console.log("You chose multiplayer mode");
+      return <MultiTriviaSearch />
+    };
+  };
+
+  handleChange = event => {
     var result = event.target.value;
     console.log(result);
     this.setState({value: event.target.value})
-    showMode(result);
+    this.showMode(result);
   };
 
   render() {
@@ -49,8 +54,9 @@ class Game extends Component {
             <option value='singleMode'>Single Player Mode</option>
             <option value='multiMode'>Multi-Player Mode</option>
           </select>
-          <SingleTriviaSearch /> 
-          <MultiTriviaSearch /> 
+          {this.showMode(this.state.value)}
+          {/* <SingleTriviaSearch value={this.state.value}/>  */}
+          {/* <MultiTriviaSearch value={this.state.value}/>  */}
         </label>
       </form>
       </div>

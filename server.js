@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing models 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, () => {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
   });

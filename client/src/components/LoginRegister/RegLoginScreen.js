@@ -19,46 +19,42 @@ class RegLoginScreen extends Component {
     this.state={
       username:'',
       password:'',
-      loginscreen:[],
-      loginmessage:'',
+      // loginscreen:[],
+      // loginmessage:'',
       buttonLabel:'Register',
       isLogin:true
     }
   }
 
-  componentWillMount(){
-    var loginscreen=[];
-    loginscreen.push(<Login key={Date.now()} parentContext={this} appContext={this.props.parentContext}/>);
-    var loginmessage = "Not registered yet, Register Now";
-    this.setState({
-                  loginscreen:loginscreen,
-                  loginmessage:loginmessage
-                    })
-  }
+  // componentDidMount(){
+  //   var loginscreen=[];
+  //   loginscreen.push(<Login username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} key={Date.now()} parentContext={this} appContext={this.props.parentContext}/>);
+  //   var ;
+  //   this.setState({
+  //                 loginscreen:loginscreen,
+  //                 loginmessage:loginmessage
+  //                   })
+  // }
   
   handleClick(event){
     // console.log("event",event);
-    var loginmessage;
-    var loginscreen=[];
+    // var loginmessage;
+    // var loginscreen=[];
     if(this.state.isLogin){
-      loginscreen.push(<Register key={Date.now()} parentContext={this}/>);
-      loginmessage = "Already registered.Go to Login";
+      // loginscreen.push(<Register username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} key={Date.now()} parentContext={this}/>);
+      // loginmessage = "Already registered.Go to Login";
       this.setState({
-                     loginscreen:loginscreen,
-                     loginmessage:loginmessage,
-                     buttonLabel:"Login",
-                     isLogin:false
-                   })
+        loginmessage: "Not registered yet, Register Now",
+        buttonLabel:'Register',   
+        isLogin:false
+        })
     }
     else{
-      loginscreen.push(<Login key={Date.now()} parentContext={this}/>);
-      loginmessage = "Not Registered yet.Go to registration";
       this.setState({
-                     loginscreen:loginscreen,
-                     loginmessage:loginmessage,
-                     buttonLabel:"Register",
-                     isLogin:true
-                   })
+        loginmessage: "Already registered.Go to Login",
+        buttonLabel:'Login',
+        isLogin:true
+      })
     }
   }
 
@@ -66,7 +62,11 @@ class RegLoginScreen extends Component {
     return (
       <div className="loginscreen">
       <LoginScreenWrapper>
-        {this.state.loginscreen}
+        {this.state.isLogin ? 
+          (<Login username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleSubmit={this.props.handleSubmit} parentContext={this} appContext={this.props.parentContext}/>)
+          :
+          (<Register username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleClick={this.props.handleClick} parentContext={this}/>)
+        }
         <div>
           {this.state.loginmessage}
           <MuiThemeProvider>

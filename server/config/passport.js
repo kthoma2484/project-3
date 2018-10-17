@@ -19,7 +19,7 @@ module.exports = function(passport) {
 
     // Used to deserialize
     passport.deserializeUser(function(playerid, done) {
-        Player.findById(playerid, function(err, player) {
+        db.Player.findById(playerid, function(err, player) {
             done(err, player);
         });
     });
@@ -28,6 +28,33 @@ module.exports = function(passport) {
     // LOCAL SIGNUP ============================================================
  
     // Use named strategies since we have one for login and one for registration by default, if there was no name, it would just be called 'local'
+    passport.use('local-login', new LocalStrategy({
+        usernameField : 'username',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, username, password, done) {
+
+        process.nextTick(function() {
+            console.log('username is:' + username + ' password is: ' + password);
+
+            db.Player.findOne({ where: { username, password }})
+            .then(function(player, err) {
+                // if there are any errors, return the error
+                console.log(player.username);  
+
+                if (err)
+                return done(err);
+                
+                if (player) {
+                    return done(null, player);
+                } else {
+                    return done(null, req.flash('IncorrectLogin', 'That username and/or password is incorrect.'));
+                };
+            });
+        });
+    }));
+    
 
     passport.use('local-register', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
@@ -54,11 +81,12 @@ module.exports = function(passport) {
             } else {
                 
                 // if there is no player with that username create the player
-                var newPlayer = new Player();
+                var newPlayer = new db.Player();
 
                 // set the player's local credentials
                 newPlayer.username = username;
-                newPlayer.password = newPlayer.generateHash(password);
+                newPlayer.password = password;
+                // newPlayer.password = newPlayer.generateHash(password);
 
                 // save the player
                 newPlayer.save(function(err) {

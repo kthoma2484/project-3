@@ -27,19 +27,20 @@ class Gameplay extends Component {
         }
     }
 
-    componentWillMount(){
-        var loginPage =[];
-        loginPage.push(<RegLoginScreen key={Date.now()} parentContext={this}/>);
-        this.setState({
-            loginPage:loginPage
-            })
-    }
+    // componentWillMount(){
+    //     var loginPage =[];
+    //     loginPage.push(<RegLoginScreen key={Date.now()} parentContext={this}/>);
+    //     this.setState({
+    //         loginPage:loginPage
+    //         })
+    // }
 
     render() {
         return (
             <GamePlayWrapper>
-                <div className="App">
-                    {this.state.loginPage}
+                <div>
+                    {/* {this.state.loginPage} */}
+                    <RegLoginScreen username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleClick={this.props.handleClick} handleSubmit={this.props.handleSubmit} />
                 </div>
           </GamePlayWrapper>
         );

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import axios from 'axios';
+// import TextField from 'material-ui/TextField';
+// import axios from 'axios';
+// import { Redirect } from 'react-router';
 
 
 const LoginWrapper = styled('div')({
@@ -14,45 +15,14 @@ const LoginWrapper = styled('div')({
 })
 
 class Login extends Component {
-
-    constructor(props){
-      super(props);
-      this.state={
-      username:'',
-      password:'',
-      }
-    }
-    
-    handleSubmit(event) {
-        var apiBaseUrl = "http://localhost:3000/api/";
-        // var self = this;
-        var payload={
-        "username":this.state.username,
-        "password":this.state.password
-        }
-        
-        axios.post(apiBaseUrl+'login', payload)
-        .then(function (response) {
-        console.log(response);
-        //console.log("code is: " + response.status)
-        if(response.status === 200){
-        console.log("Login successfull");
-
-      }
-        else if(response.status === 204){
-        console.log("Username password do not match");
-        alert("Username password do not match")
-        }
-        else{
-        console.log("Username does not exists");
-        alert("Username does not exist");
-        }
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-    }
-
+ constructor(props) {
+   super(props)
+ 
+   this.state = {
+      
+   }
+ }
+ 
     render() {
         return (
           <div>
@@ -62,20 +32,30 @@ class Login extends Component {
               <h4>
                 Login
                </h4>
-               <TextField
-                 hintText="Enter your Username"
-                 floatingLabelText="Username"
-                 onChange = {(event,newValue) => this.setState({username:newValue})}
-                 />
+               <form>
+                <label htmlFor="username">
+                Enter your username:
+                </label>
+                <input
+                 type="text"
+                 name="username"
+                 value={this.props.username}
+                 onChange= {this.props.handleInputChange}>
+                </input>
+                <br/>
+                <label>
+                Enter user password:
+                </label>
+                <input
+                type="text"
+                name="password"
+                value={this.props.password}
+                onChange = {this.props.handleInputChange}  
+                >
+                </input>
+               </form>
                <br/>
-                 <TextField
-                   type="password"
-                   hintText="Enter your Password"
-                   floatingLabelText="Password"
-                   onChange = {(event,newValue) => this.setState({password:newValue})}
-                   />
-                 <br/>
-                 <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleSubmit(event)}/>
+                 <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.props.handleSubmit(event)}/>
              </div>
              </MuiThemeProvider>
              </LoginWrapper>

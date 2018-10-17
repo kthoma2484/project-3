@@ -51,6 +51,20 @@ module.exports = function(app, passport) {
     failureFlash : true // allow flash messages
   }));
 
+
+  // process the login form
+//   app.post('/api/login', passport.authenticate('local-login', {
+//     successRedirect : 'http://localhost:3000/userprofile', // redirect to the secure profile section
+//     failureRedirect : '/gameplay', // redirect back to the gameplay page if there is an error
+//     failureFlash : true // allow flash messages
+//   }));
+
+  app.post('/api/login', 
+  passport.authenticate('local-login', { failureRedirect: '/gameplay' }),
+  function(req, res) {
+    res.redirect('/');
+  });  
+  
   // =====================================
   // LOGOUT ==============================
   // =====================================
