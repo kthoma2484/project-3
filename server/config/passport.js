@@ -13,49 +13,60 @@ module.exports = function(passport) {
     // Passport needs ability to serialize and unserialize players out of session
 
     // Used to serialize
-    passport.serializeUser(function(player, done) {
-        done(null, player.playerid);
+    passport.serializeUser(function(username, done) {
+        done(null, username);
     });
 
     // Used to deserialize
-    passport.deserializeUser(function(playerid, done) {
-        db.Player.findById(playerid, function(err, player) {
-            done(err, player);
-        });
+    passport.deserializeUser(function(username, done) {
+        done(null, username);
     });
 
 
-    // LOCAL SIGNUP ============================================================
- 
+    
     // Use named strategies since we have one for login and one for registration by default, if there was no name, it would just be called 'local'
+    
+    // LOCAL Login ============================================================
     passport.use('local-login', new LocalStrategy({
         usernameField : 'username',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
-    },
-    function(req, username, password, done) {
+        },
+        function(req, username, password, done) {
 
-        process.nextTick(function() {
-            console.log('username is:' + username + ' password is: ' + password);
+            process.nextTick(function() {
+                console.log('username is:' + username + ' password is: ' + password);
 
-            db.Player.findOne({ where: { username, password }})
-            .then(function(player, err) {
-                // if there are any errors, return the error
-                console.log(player.username);  
+                // find a user whose username is the same as the forms username
+                // we are checking to see if the user trying to login already exists
+                db.Player.findOne({ 
+                    where: { 
+                        'username': username, 
+                        'password': password 
+                        }
+                    }, 
+                    function(err, player) {
+                    // if there are any errors, return the error
+                    if (err)
+                    return done(err);
+                    // if no user is found, return the message
+                    if (!player.username) 
+                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.')); // req.flash is the way to set flashdata using connect-flash'));
 
-                if (err)
-                return done(err);
+                    // if the user is found but the password is wrong
+                    if (!player.validPassword(password))
+                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.')); // create the loginMessage and save it to session as flashdata
                 
-                if (player) {
+                    //if login is good, return succesful user
+                    console.log("user: " + username + " found")
                     return done(null, player);
-                } else {
-                    return done(null, req.flash('IncorrectLogin', 'That username and/or password is incorrect.'));
-                };
-            });
-        });
-    }));
+                });
+            });  
+        })
+    );
     
-
+     
+    // LOCAL Registration ============================================================
     passport.use('local-register', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'username',
@@ -71,10 +82,9 @@ module.exports = function(passport) {
         // find a player whose username is the same as the forms username we are checking to see if the player trying to login already exists
         db.Player.findOne({ where: { username }})
             .then(function(err, player) {
-            // if there are any errors, return the error
             if (err)
                 return done(err);
-
+            
             // check to see if theres already a player with that username
             if (player) {
                 return done(null, false, req.flash('registrationMessage', 'That username is already taken.'));

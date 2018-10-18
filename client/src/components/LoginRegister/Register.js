@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-// import axios from 'axios';
-// import Login from './Login';
 
 const RegisterWrapper = styled('div')({
   display: 'flex',
@@ -24,27 +21,43 @@ class Register extends Component {
             <h4>
               Register
             </h4>
-           <TextField
-             hintText="Create a Username"
-             floatingLabelText="Userame"
-             onChange = {(event,newValue) => this.setState({username:newValue})}
-             />
+            <form>
+                <label htmlFor="username">
+                Enter your email:
+                </label>
+                <br/>
+                <input
+                  type="text"
+                  name="email"
+                  value={this.props.email}
+                  onChange= {this.props.handleInputChange}>
+                </input>
+                <br/>
+                <label htmlFor="username">
+                Create a username:
+                </label>
+                <br/>
+                <input
+                  type="text"
+                  name="username"
+                  value={this.props.username}
+                  onChange= {this.props.handleInputChange}>
+                </input>
+                <br/>
+                <label>
+                Create a password:
+                </label>
+                <br/>
+                  <input
+                  type="text"
+                  name="password"
+                  value={this.props.password}
+                  onChange = {this.props.handleInputChange}  
+                >
+                </input>
+               </form>
            <br/>
-           <TextField
-             hintText="Enter your Email"
-             type="email"
-             floatingLabelText="Email"
-             onChange = {(event,newValue) => this.setState({email:newValue})}
-             />
-           <br/>
-           <TextField
-             type = "password"
-             hintText="Enter your Password"
-             floatingLabelText="Password"
-             onChange = {(event,newValue) => this.setState({password:newValue})}
-             />
-           <br/>
-           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.props.handleClick(event)}/>
           </div>
          </MuiThemeProvider>
         </RegisterWrapper>

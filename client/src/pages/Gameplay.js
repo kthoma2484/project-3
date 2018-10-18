@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
 import styled from 'react-emotion';
-// import Game from "../components/Game";
 import RegLoginScreen from "../components/LoginRegister/RegLoginScreen";
 
 
@@ -14,7 +10,7 @@ const GamePlayWrapper = styled('div')({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
-})
+});
 
 
 class Gameplay extends Component {
@@ -25,15 +21,7 @@ class Gameplay extends Component {
           loginPage:[],
           uploadScreen:[]
         }
-    }
-
-    // componentWillMount(){
-    //     var loginPage =[];
-    //     loginPage.push(<RegLoginScreen key={Date.now()} parentContext={this}/>);
-    //     this.setState({
-    //         loginPage:loginPage
-    //         })
-    // }
+    };
 
     render() {
         return (
@@ -44,7 +32,7 @@ class Gameplay extends Component {
                 </div>
           </GamePlayWrapper>
         );
-    }
-}
+    };
+};
   
 export default Gameplay

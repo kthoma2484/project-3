@@ -19,44 +19,28 @@ class RegLoginScreen extends Component {
     this.state={
       username:'',
       password:'',
-      // loginscreen:[],
-      // loginmessage:'',
+      loginmessage: "Not registered yet, Register Now",
       buttonLabel:'Register',
       isLogin:true
-    }
-  }
-
-  // componentDidMount(){
-  //   var loginscreen=[];
-  //   loginscreen.push(<Login username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} key={Date.now()} parentContext={this} appContext={this.props.parentContext}/>);
-  //   var ;
-  //   this.setState({
-  //                 loginscreen:loginscreen,
-  //                 loginmessage:loginmessage
-  //                   })
-  // }
+    };
+  };
   
   handleClick(event){
-    // console.log("event",event);
-    // var loginmessage;
-    // var loginscreen=[];
     if(this.state.isLogin){
-      // loginscreen.push(<Register username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} key={Date.now()} parentContext={this}/>);
-      // loginmessage = "Already registered.Go to Login";
       this.setState({
-        loginmessage: "Not registered yet, Register Now",
-        buttonLabel:'Register',   
+        loginmessage: "Already registered.Go to Login",
+        buttonLabel:'Login',   
         isLogin:false
-        })
+        });
     }
     else{
       this.setState({
-        loginmessage: "Already registered.Go to Login",
-        buttonLabel:'Login',
+        loginmessage: "Not registered yet, Register Now",
+        buttonLabel:'Register',
         isLogin:true
-      })
-    }
-  }
+      });
+    };
+  };
 
   render() {
     return (

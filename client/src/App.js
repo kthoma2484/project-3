@@ -25,11 +25,11 @@ const Logo = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif'
-})
+});
 
 const Content = styled('div')({
   marginTop: 10
-})
+});
 
 class App extends Component {
   constructor(props) {
@@ -40,16 +40,15 @@ class App extends Component {
         password: '',
         email: '',
         loggedIn: false
-    }
-  }
+    };
+  };
   
   handleSubmit = event => {
     var apiBaseUrl = "http://localhost:3001/api";
-    // var self = this;
     var payload={
     "username":this.state.username,
     "password":this.state.password
-    }
+    };
     
     axios.post(apiBaseUrl+'/login', payload)
     .then(response => {
@@ -58,7 +57,7 @@ class App extends Component {
     if(response.status === 200){
     console.log("Login successfull");
     this.setState({ loggedIn : true });
-  }
+    }
     else if(response.status === 204){
     console.log("Username password do not match");
     alert("Username password do not match")
@@ -71,7 +70,7 @@ class App extends Component {
     .catch(function (error) {
     console.log(error);
     });
-  }
+  };
 
   handleClick = event => {
     var apiBaseUrl = "http://localhost:3001/api";
@@ -101,7 +100,7 @@ class App extends Component {
    .catch(function (error) {
      console.log(error);
    });
-  }
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -112,7 +111,7 @@ class App extends Component {
 
   componentDidUpdate = () => {
     console.log(this.state);
-  }
+  };
 
   render() {
     return (
@@ -123,7 +122,6 @@ class App extends Component {
           </Logo>
           <Header />
           <Content>
-
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route path="/instructions" component={Instructions} />
@@ -139,7 +137,7 @@ class App extends Component {
         </div>
       </Router>
     );
-  }
-}
+  };
+};
 
 export default App;

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-// import TextField from 'material-ui/TextField';
-// import axios from 'axios';
-// import { Redirect } from 'react-router';
-
 
 const LoginWrapper = styled('div')({
     display: 'flex',
@@ -36,6 +32,7 @@ class Login extends Component {
                 <label htmlFor="username">
                 Enter your username:
                 </label>
+                <br/>
                 <input
                  type="text"
                  name="username"
@@ -46,6 +43,7 @@ class Login extends Component {
                 <label>
                 Enter user password:
                 </label>
+                <br/>
                 <input
                 type="text"
                 name="password"
