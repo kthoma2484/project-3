@@ -115,7 +115,8 @@ const Logo = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif'
+  fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif',
+  marginBottom: '20'
 });
 
 const Content = styled('div')({
@@ -127,9 +128,12 @@ class App extends Component {
     super(props)
   
     this.state = {
+        playerid: '',
         username: '',
         password: '',
         email: '',
+        singlescore: '',
+        multiplayscore: '',
         loggedIn: false
     };
   };
@@ -222,7 +226,7 @@ class App extends Component {
                 (<Gameplay username={this.state.username} password={this.state.password} email={this.state.email} handleInputChange={this.handleInputChange} handleClick={this.handleClick} handleSubmit={this.handleSubmit} />))
                 } />
               <Route path="/highscore" component={Highscore} />
-              <Route path="/userprofile" component={Userprofile} />
+              <Route path="/userprofile" component={Userprofile} username={this.state.username}/>
             
             </Switch>
               <Particles

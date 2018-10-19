@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-import SingleTriviaSearch from "./SingleTriviaSearch";
-import MultiTriviaSearch from "./MultiTriviaSearch";
-import API from "../../utils/API";
+// import SingleTriviaSearch from "./SingleTriviaSearch";
+// import MultiTriviaSearch from "./MultiTriviaSearch";
+// import API from "../../utils/API";
 
 const formStyle = {
   display: 'flex',
@@ -15,82 +15,86 @@ const GameWrapper = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  margin: 30,
 })
 
+const optionStyle = {
+  color: 'black'
+}; 
+
 class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'default',
-      results2: [
-        {"id": 9, "name": "General Knowledge"},
-        {"id": 10, "name": "Entertainment: Books"},
-        {"id": 11, "name": "Entertainment: Film"},
-        {"id": 12, "name": "Entertainment: Music"},
-        {"id": 13, "name": "Entertainment: Musicals & Theatres"},
-        {"id": 14, "name": "Entertainment: Television"},  ]
-    };
-  };
+  
 
   // state = {
   //   // search: "",
   //   results: []
   // };
-  showMode = value => {
-    if (value === 'default') {
-      console.log("No mode choosen");
-    };
-    if (value === 'singleMode') {
-      console.log("You chose single mode");
-      return <SingleTriviaSearch column results2={this.state.results2}/>
-    };
-    if (value === 'multiMode') {
-      console.log("You chose multiplayer mode");
-      return <MultiTriviaSearch column results={this.state.results}/>
-    };
-  };
+  // showMode = value => {
+  //   if (value === 'default') {
+  //     console.log("No mode choosen");
+  //   };
+  //   if (value === 'singleMode') {
+  //     console.log("You chose single mode");
+  //     return <SingleTriviaSearch categories={this.props.categories} showCategories={this.props.showCategories}/>
+  //   };
+  //   if (value === 'multiMode') {
+  //     console.log("You chose multiplayer mode");
+  //     return <MultiTriviaSearch categories={this.props.categories}/>
+  //   };
+  // };
 
-  handleChange = event => {
-    var result = event.target.value;
-    console.log(result);
-    this.setState({value: event.target.value})
-    this.showMode(result);
-  };
+  // handleChange = event => {
+  //   var result = event.target.value;
+  //   console.log(result);
+  //   this.setState({value: event.target.value})
+  //   this.showMode(result);
+  // };
 
-  // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchCategories(this.state.search);
-  };
+  // // When the form is submitted, search the Giphy API for `this.state.search`
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   // this.searchTrivia(this.state.search);
+  //   // this.state.mode = "single";
+  //   console.log(this.state.mode);
 
-  searchCategories = () => {
-    API.getCategories("_category.php/")
-      .then(res => this.setState({ results: res.data.trivia_categories}))
-      .catch(err => console.log(err));
-  };
+  //   // this.state.level= "hard";
+  //   console.log(this.state.level);
 
-  // When this component mounts, search the trivia categories
-  componentDidMount = () => {
-    this.searchCategories();
-  }
+  //   this.searchTrivia();
+  //   console.log(this.state.questions);
+  // };
+
+  // searchTrivia = () => {
+    
+  //   if (this.state.mode === "single" && this.state.level === "hard") {
+  //     var query = ".php?amount=20&difficulty=medium"
+  //     API.searchSingleHard(query)
+  //       .then(res => this.setState({ questions: res.data.results}))
+  //       .catch(err => console.log(err));
+  //     }
+  // };
+
+  // // When this component mounts, search the trivia categories
+  // componentDidMount = () => {
+  //   this.searchTrivia();
+  // }
 
   render() {
-    console.log("this is rendered.")
     return (
       <GameWrapper column>
       <form onSubmit={this.handleSubmit}>
         <label style={formStyle}>
           <h4 style={formStyle}>Select your game mode and options:</h4>
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value='default'>Choose Your Mode:</option>
-            <option value='singleMode'>Single Player Mode</option>
-            <option value='multiMode'>Multi-Player Mode</option>
+          <select id="mode" style={optionStyle} value={this.props.mode} onChange={this.props.handleChange}>
+            <option style={optionStyle} value='default'>Choose Your Mode:</option>
+            <option style={optionStyle} value='singleMode'>Single Player Mode</option>
+            <option style={optionStyle} value='multiMode'>Multi-Player Mode</option>
           </select>
         </label>
       </form>
       <br/>
-      {this.showMode(this.state.value)}
+      <div>
+      {this.props.showMode(this.props.mode)}
+      </div>
       </GameWrapper>
     );
   }

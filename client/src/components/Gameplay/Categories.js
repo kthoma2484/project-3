@@ -15,45 +15,49 @@ const CategoriesWrapper = styled('div')({
     justifyContent: 'center',
 })
 
+const optionStyle = {
+    color: 'black'
+};
+
 class Categories extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          value: 'default',
-        };
-    };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //       value: 'default',
+    //     };
+    // };
 
-    handleChange = event => {
-        var result = event.target.value;
-        console.log(result);
-        console.log(typeof result.id)
-        this.setState({
-          value: event.target.value, 
-          key: event.target.key, 
-        })
-        console.log("Your category is: " + event.target.value);
-      };
+    // handleChange = event => {
+    //     var result = event.target.value;
+    //     console.log(result);
+    //     console.log(typeof result.id)
+    //     this.setState({
+    //       value: event.target.value, 
+    //       key: event.target.key, 
+    //     })
+    //     console.log("Your category is: " + event.target.value);
+    // };
      
-    componentDidUpdate = () => {
-        console.log(this.state);
-    }
+    // componentDidUpdate = () => {
+    //     console.log(this.state);
+    // }
 
     render () {
         return (
-            <label style={formStyle}>
                 <CategoriesWrapper>
-                <h4 style={formStyle}>Select Your Category!</h4>
-                <select id="category" value={this.state.value} onChange={this.handleChange}>
-                    <option value='default'>Choose Your Level:</option>
-                    {this.props.results2.map(result => (
-                        <option value={result.name} key={result.id}>
-                            {result.name}
-                        </option>
-                    ))}
-                </select>
+                    <label id="normal-category">
+                        <h4 style={formStyle}>You've choosen normal - Select Your Category!</h4>
+                        <select id="category" value={this.props.categoryPick} onChange={this.props.handleChange}>
+                            <option style={optionStyle} value='default'></option>
+                            {this.props.categories.map(category => (
+                                <option style={optionStyle} value={category.name} key={category.id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
                 </CategoriesWrapper>
-            </label>
         );
     }
 }

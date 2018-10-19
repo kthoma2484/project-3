@@ -4,7 +4,10 @@ import axios from "axios";
 const BASEURL = "http://opentdb.com/api";
 
 export default {
-  getCategories: function(query) {
+  searchSingleHard: function(query) {
+    return axios.get(BASEURL + query);
+  },
+  searchSingleInsanity: function(query) {
     return axios.get(BASEURL + query);
   }
 };

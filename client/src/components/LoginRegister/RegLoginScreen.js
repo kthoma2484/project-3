@@ -8,8 +8,12 @@ const LoginScreenWrapper = styled('div')({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  margin: 30,
-})
+});
+
+const buttonStyle = {
+  color: 'darkblue',
+  margin: 15,
+};
 
 class RegLoginScreen extends Component {
 
@@ -49,16 +53,12 @@ class RegLoginScreen extends Component {
           :
           (<Register username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleClick={this.props.handleClick} parentContext={this}/>)
         }
-       
-          {this.state.loginmessage}           
-               <button label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}>Submit</button>        
+        <br/>
+        {this.state.loginmessage}  
+        <button style={buttonStyle} label={this.state.buttonLabel} onClick={(event) => this.handleClick(event)}>{this.state.buttonLabel}</button>        
       </LoginScreenWrapper>
     );
   }
-}
-
-const style = {
-  margin: 15,
 };
 
 export default RegLoginScreen;

@@ -5,59 +5,59 @@ const LoginWrapper = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 30,
-})
+    justifyContent: 'center'
+});
+
+const buttonStyle = {
+  color: 'darkblue',
+  margin: 15,
+};
+
+const underline = {
+  textDecorationLine: 'underline'
+};
+
+const formStyle = {
+  color: 'black'
+};
 
 class Login extends Component {
- constructor(props) {
-   super(props)
  
-   this.state = {
-      
-   }
- }
- 
-    render() {
-        return (
-            <LoginWrapper column>
-              <h4>
-                Login
-               </h4>
-               <form>
-                <label htmlFor="username">
-                Enter your username:
-                </label>
-                <br/>
-                <input
-                 type="text"
-                 name="username"
-                 value={this.props.username}
-                 onChange= {this.props.handleInputChange}>
-                </input>
-                <br/>
-                <label>
-                Enter user password:
-                </label>
-                <br/>
-                <input
-                type="text"
-                name="password"
-                value={this.props.password}
-                onChange = {this.props.handleInputChange}  
-                >
-                </input>
-               </form>
-               <br/>
-                 <button label="Submit" primary={true} style={style} onClick={(event) => this.props.handleSubmit(event)}>Submit</button>
-             </LoginWrapper>
-        );
-      }
-    }
-    
-    const style = {
-     margin: 15,
-    };
-    
+  render() {
+    return (
+        <LoginWrapper column>
+          <h2 style={underline}>
+            <em>Login</em>
+          </h2>
+          <form>
+            <label htmlFor="username">
+            Enter your username:
+            </label>
+            <br/>
+            <input style={formStyle}
+            type="text"
+            name="username"
+            value={this.props.username}
+            onChange= {this.props.handleInputChange}>
+            </input>
+            <br/>
+            <label htmlFor="password">
+            Enter user password:
+            </label>
+            <br/>
+            <input style={formStyle}
+            type="text"
+            name="password"
+            value={this.props.password}
+            onChange = {this.props.handleInputChange}  
+            >
+            </input>
+          </form>
+          <br/>
+            <button style={buttonStyle} label="Submit" onClick={(event) => this.props.handleSubmit(event)}>Submit</button>
+        </LoginWrapper>
+    );
+  }    
+};
   
-export default Login
+export default Login;

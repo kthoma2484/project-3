@@ -6,23 +6,36 @@ const RegisterWrapper = styled('div')({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  margin: 30,
-})
+});
+
+const buttonStyle = {
+  color: 'darkblue',
+  margin: 15,
+};
+
+const underline = {
+  textDecorationLine: 'underline'
+};
+
+
+const formStyle = {
+  color: 'black'
+};
 
 class Register extends Component {
 
   render() {
     return (
         <RegisterWrapper column>
-            <h4>
-              Register
-            </h4>
+            <h2 style={underline}>
+              <em>Register</em>
+            </h2>
             <form>
-                <label htmlFor="username">
+                <label htmlFor="email">
                 Enter your email:
                 </label>
                 <br/>
-                <input
+                <input style={formStyle}
                   type="text"
                   name="email"
                   value={this.props.email}
@@ -33,18 +46,18 @@ class Register extends Component {
                 Create a username:
                 </label>
                 <br/>
-                <input
+                <input style={formStyle}
                   type="text"
                   name="username"
                   value={this.props.username}
                   onChange= {this.props.handleInputChange}>
                 </input>
                 <br/>
-                <label>
+                <label htmlFor="password">
                 Create a password:
                 </label>
                 <br/>
-                  <input
+                  <input style={formStyle}
                   type="text"
                   name="password"
                   value={this.props.password}
@@ -53,14 +66,10 @@ class Register extends Component {
                 </input>
                </form>
            <br/>
-           <button label="Submit" primary={true} style={style} onClick={(event) => this.props.handleClick(event)}>Submit</button>
+           <button style={buttonStyle} label="Submit" onClick={(event) => this.props.handleClick(event)}>Submit</button>
         </RegisterWrapper>
     );
   }
-}
-
-const style = {
-  margin: 15,
 };
 
 export default Register;

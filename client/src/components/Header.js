@@ -9,7 +9,9 @@ const HeaderWrapper = styled('header')({
   textAlign: 'center',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-around'
+  justifyContent: 'space-around',
+  fontSize: 20,
+  marginBottom: 20
 })
 
 const Header = () => (
