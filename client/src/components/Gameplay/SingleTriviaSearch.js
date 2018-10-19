@@ -63,7 +63,7 @@ class SingleTriviaSearch extends Component {
     
     return (
     <div>
-      <SearchWrapper>
+      <SearchWrapper column>
         <h2>Single Player Mode</h2>
         <h4>Difficulty Level</h4>
         <form onSubmit={this.handleSubmit}>

@@ -112,7 +112,7 @@ class MultiTriviaSearch extends Component {
   render() {
     
     return (
-    <div>
+    <div column>
       <SearchWrapper>
       <h2>Multi-Player Mode</h2>
       <h4>Difficulty Level</h4>

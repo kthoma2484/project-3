@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const RegisterWrapper = styled('div')({
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   margin: 30,
@@ -14,10 +13,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <RegisterWrapper>
-        <MuiThemeProvider>
-          <div>
+        <RegisterWrapper column>
             <h4>
               Register
             </h4>
@@ -57,11 +53,8 @@ class Register extends Component {
                 </input>
                </form>
            <br/>
-           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.props.handleClick(event)}/>
-          </div>
-         </MuiThemeProvider>
+           <button label="Submit" primary={true} style={style} onClick={(event) => this.props.handleClick(event)}>Submit</button>
         </RegisterWrapper>
-      </div>
     );
   }
 }

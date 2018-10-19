@@ -21,7 +21,6 @@ class Userprofile extends Component {
     
     render() {
         return (
-          <div>
             <UserWrapper column>
                 <h4> 
                 Welcome User {this.state.username}!
@@ -31,7 +30,6 @@ class Userprofile extends Component {
                 <br/> 
                 <Game />
             </UserWrapper>
-          </div>
         );
       }
     }

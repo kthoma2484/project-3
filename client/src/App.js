@@ -17,29 +17,16 @@ import axios from "axios";
 import Login from './components/LoginRegister/Login';
 import './App.css';
 import Particles from 'react-particles-js';
+import backgroundImg from './images/q1.png';
 
 const particlesOpt = {
   particles: {
-    number: {
-      value:20,
-      density: {
-        enable: true,
-        value_are: 5839.692548078818}
-      },
-      shape:{
-        type:"circle",
-        stroke:{
-          width:0,
-          color:"#000000"},
-          polygon:{
-            nb_sides:3.1
-          },
+    type:"image",
           image:{
-            src:"img/github.svg",
+            src: {backgroundImg},
             width:100,
             height:100
-          }
-        },
+          },
         opacity:{
           value:0.5,
           random:false,
@@ -64,11 +51,66 @@ const particlesOpt = {
               opacity:0.4,
               width:1},
               move:{
-                enable:true,speed:6,direction:"none",random:false,straight:false,out_mode:"out",bounce:false,attract:{enable:false,rotateX:600,rotateY:1200}}},interactivity:{detect_on:"canvas",events:{onhover:{enable:false,mode:"grab"},onclick:{enable:true,mode:"push"},resize:true},modes:{grab:{distance:0,line_linked:{opacity:0}},bubble:{distance:400,size:40,duration:2,opacity:8,speed:3},repulse:{distance:200,duration:0.4},push:{particles_nb:4},remove:{particles_nb:2}}},retina_detect:true}
+                enable:true,
+                speed:6,
+                direction:"none",
+                random:false,
+                straight:false,
+                out_mode:"out",
+                bounce:false,
+                attract:{
+                  enable:false,
+                  rotateX:600,
+                  rotateY:1200
+                }
+              }
+            },
+            interactivity:{
+              detect_on:"canvas",
+              events:{
+                onhover:{
+                  enable:false,
+                  mode:"grab"
+                },
+                onclick:{
+                  enable:true,
+                  mode:"push"
+                },
+                resize:true
+              },
+              modes:{
+                grab:{
+                  distance:0,
+                  line_linked:{
+                    opacity:0
+                  }
+                },
+                bubble:{
+                  distance:400,
+                  size:40,
+                  duration:2,
+                  opacity:8,
+                  speed:3
+                },
+                repulse:{
+                  distance:200,
+                  duration:0.4
+                },
+                push:{
+                  particles_nb:4
+                },
+                remove:{
+                  particles_nb:2
+                }
+              }
+            },
+            retina_detect:true
+}
 
 const Logo = styled('div')({
   fontSize: '40px',
-  color: '#B311B9',
+  color: "rgba(133, 232, 58, .8)",
+  boxShadow: '5px 5px solid black',
   margin: 10,
   display: 'flex',
   alignItems: 'center',
@@ -181,11 +223,13 @@ class App extends Component {
                 } />
               <Route path="/highscore" component={Highscore} />
               <Route path="/userprofile" component={Userprofile} />
+            
             </Switch>
-          </Content>
-          <Particles
+              <Particles
               params={particlesOpt}
             />
+          </Content>
+          
         </div>
       </Router>
     );

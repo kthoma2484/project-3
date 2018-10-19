@@ -3,7 +3,7 @@ body {
     padding: 0;
     font-family: sans-serif;
     background: #2c2c35;
-    background-image: url("./ZenBG-1.png"), url("./ZenBG-2.png");
+    background-image: url("./images/ZenBG-1.png"), url("./images/ZenBG-2.png");
     background-repeat: repeat-x, repeat;
     color: rgb(161, 224, 136);
 } 

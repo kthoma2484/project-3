@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 import Login from './Login';
 import Register from './Register';
 
 const LoginScreenWrapper = styled('div')({
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   margin: 30,
@@ -44,23 +43,16 @@ class RegLoginScreen extends Component {
 
   render() {
     return (
-      <div className="loginscreen">
-      <LoginScreenWrapper>
+      <LoginScreenWrapper column>
         {this.state.isLogin ? 
           (<Login username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleSubmit={this.props.handleSubmit} parentContext={this} appContext={this.props.parentContext}/>)
           :
           (<Register username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleClick={this.props.handleClick} parentContext={this}/>)
         }
-        <div>
-          {this.state.loginmessage}
-          <MuiThemeProvider>
-            <div>
-               <RaisedButton label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-           </div>
-          </MuiThemeProvider>
-        </div>
+       
+          {this.state.loginmessage}           
+               <button label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}>Submit</button>        
       </LoginScreenWrapper>
-      </div>
     );
   }
 }

@@ -25,7 +25,7 @@ class Gameplay extends Component {
 
     render() {
         return (
-            <GamePlayWrapper>
+            <GamePlayWrapper column>
                 <div>
                     {/* {this.state.loginPage} */}
                     <RegLoginScreen username={this.props.username} password={this.props.password} email={this.props.email} handleInputChange={this.props.handleInputChange} handleClick={this.props.handleClick} handleSubmit={this.props.handleSubmit} />

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from 'react-emotion';
 import SingleTriviaSearch from "./SingleTriviaSearch";
 import MultiTriviaSearch from "./MultiTriviaSearch";
 import API from "../../utils/API";
@@ -9,6 +10,13 @@ const formStyle = {
   alignItems: 'center',
   justifyContent: 'center'
 };
+
+const GameWrapper = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  margin: 30,
+})
 
 class Game extends Component {
   constructor(props) {
@@ -35,11 +43,11 @@ class Game extends Component {
     };
     if (value === 'singleMode') {
       console.log("You chose single mode");
-      return <SingleTriviaSearch results2={this.state.results2}/>
+      return <SingleTriviaSearch column results2={this.state.results2}/>
     };
     if (value === 'multiMode') {
       console.log("You chose multiplayer mode");
-      return <MultiTriviaSearch results={this.state.results}/>
+      return <MultiTriviaSearch column results={this.state.results}/>
     };
   };
 
@@ -70,7 +78,7 @@ class Game extends Component {
   render() {
     console.log("this is rendered.")
     return (
-      <div>
+      <GameWrapper column>
       <form onSubmit={this.handleSubmit}>
         <label style={formStyle}>
           <h4 style={formStyle}>Select your game mode and options:</h4>
@@ -81,8 +89,9 @@ class Game extends Component {
           </select>
         </label>
       </form>
+      <br/>
       {this.showMode(this.state.value)}
-      </div>
+      </GameWrapper>
     );
   }
 }

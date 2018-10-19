@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const LoginWrapper = styled('div')({
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 30,
@@ -21,10 +20,7 @@ class Login extends Component {
  
     render() {
         return (
-          <div>
-            <LoginWrapper>
-            <MuiThemeProvider>
-              <div>
+            <LoginWrapper column>
               <h4>
                 Login
                </h4>
@@ -53,11 +49,8 @@ class Login extends Component {
                 </input>
                </form>
                <br/>
-                 <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.props.handleSubmit(event)}/>
-             </div>
-             </MuiThemeProvider>
+                 <button label="Submit" primary={true} style={style} onClick={(event) => this.props.handleSubmit(event)}>Submit</button>
              </LoginWrapper>
-          </div>
         );
       }
     }
