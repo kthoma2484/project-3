@@ -4,10 +4,7 @@ import axios from "axios";
 const BASEURL = "http://opentdb.com/api";
 
 export default {
-  searchSingleHard: function(query) {
-    return axios.get(BASEURL + query);
-  },
-  searchSingleInsanity: function(query) {
+  searchTriviaApi: function(query) {
     return axios.get(BASEURL + query);
   }
 };

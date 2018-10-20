@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-// import Categories from "./Categories";
 
 const formStyle = {
   display: 'flex',
@@ -28,53 +27,6 @@ const optionStyle = {
 
 class MultiTriviaSearch extends Component {
     
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: 'default',
-  //     name: 'default'
-  //   };
-  // };
-
-  componentDidUpdate = () => {
-    console.log(this.state);
-  }
-
-  // showCategories= value => {
-  //   if (value === 'default') {
-  //     console.log("No level choosen");
-  //   };
-  //   if (value === 'hard' || value === 'insanity') {
-  //     console.log("You have choosen: " + value);
-  //   };
-  //   if (value === 'hard' || value === 'insanity') {
-  //     console.log("You have choosen: " + value);
-  //   }
-  //   if (value === 'normal') {
-  //     console.log("You have choosen normal - now choose categories");
-  //     return  <div key="normal-category">
-  //     <h4>You've choosen normal - choose your categories</h4>
-  //     {this.showPlayerNum(this.state.name)}
-  //   </div>
-  //   };
-  // };
-
- 
-
-  // handleChange = event => {
-  //   var result = event.target.value;
-  //   var result2 = event.target.name;
-  //   console.log(result);
-  //   console.log(result2);
-  //   this.setState({
-  //     value: event.target.value, 
-  //     name: event.target.name
-  //   })
-  //   this.showCategories(result);
-  //   this.showPlayerNum(result2);
-
-  // };
-
   render() {
     
     return (
@@ -96,20 +48,20 @@ class MultiTriviaSearch extends Component {
         <label style={formStyle}>
           <h4 style={formStyle}>Select Number of Players</h4>
           <select style={optionStyle} id="playerNum" value={this.props.playerNum} onChange={this.props.handleChange}>
-            <option style={optionStyle} value='default'>Choose Number of Players:</option>
+            <option style={optionStyle} value='default'>Number of Players:</option>
             <option style={optionStyle} value='two'>2 Player</option>
             <option style={optionStyle} value='three'>3 Player</option>
             <option style={optionStyle} value='four'>4 Player</option>
           </select>
         </label>
         <br/>
-        {this.showCategories(this.state.value)}
+        {this.props.showCategories(this.props.level)}
       </form>
       <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>
       </SearchWrapper>
     </div>
     )
-  }
+  };
 };
 
 export default MultiTriviaSearch;

@@ -4,6 +4,7 @@ import Game from '../components/Gameplay/Game';
 import Categories from "../components/Gameplay/Categories";
 import SingleTriviaSearch from "../components/Gameplay/SingleTriviaSearch";
 import MultiTriviaSearch from "../components/Gameplay/MultiTriviaSearch";
+import TriviaGame from "../components/Gameplay/TriviaGame";
 import API from "../utils/API";
 
 const UserWrapper = styled('div')({
@@ -36,6 +37,7 @@ const buttonStyle = {
 class Userprofile extends Component {
     constructor(props) {
         super(props);
+        this.gameCreated = false
         this.state = {
           categories: [
             {"id": 9, "name": "General Knowledge"},
@@ -68,37 +70,40 @@ class Userprofile extends Component {
           mode: '',
           level: '',
           playerNum: '',
-          key: ''    
+          key: '',
         };
       };
 
-
+    // Changes state based on selections and runs functions after state changed
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({
         [name]: value
         });
 
-        console.log(event.target.id);
-
+        // Sets state player mode on selection
         if (event.target.id === 'mode') {
             this.setState({mode: event.target.value});
             this.showMode(value);
         }
+        // Sets state difficulty level on selection
         if (event.target.id === 's-level' || event.target.id === 'm-level') {
             this.setState({level: event.target.value});
             this.showCategories(value);
         }
+        // Sets number of players in multiplyer mode on selection
         if (event.target.id === 'playerNum') {
             this.setState({playerNum: event.target.value});
-            this.showPlayerNum(value);
+            // this.showPlayerNum(value);
         }
-        if (event.target.id === 'category') {
+        // Sets category pick for trivia search with easy level selection
+        if (event.target.className === 'category') {
             this.setState({categoryPick: event.target.value});
         }
 
     };
     
+    // Displays category dropdown if normal level selected
     showCategories= level => {
         if (level === 'default') {
           console.log("No difficutly level choosen");
@@ -108,94 +113,110 @@ class Userprofile extends Component {
         };
         if (level === 'insanity') {
           console.log("You have choosen difficutly level: " + level);
-        }
-        if (level === 'normal') {
+        };
+        if (level === 'normal') { 
           console.log("You have choosen difficulty level normal - now choose your category");
-          return  <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange}/>
+          return  <Categories level={this.props.level} categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange}/>
         };
     };
     
+    // Displays mode options based on mode selected
     showMode = mode => {
         if (mode === 'default') {
           console.log("No mode choosen");
         };
         if (mode === 'singleMode') {
           console.log("You chose single mode");
-          return <SingleTriviaSearch value={this.props.value} categories={this.props.categories} questions={this.props.questions} mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories}/>
+          return <SingleTriviaSearch categories={this.props.categories} questions={this.props.questions} mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
         };
         if (mode === 'multiMode') {
           console.log("You chose multiplayer mode");
-          return <MultiTriviaSearch value={this.props.value} categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories}/>
+          return <MultiTriviaSearch categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
         };
     };
     
-    showPlayerNum= playerNum => {
-        if (playerNum === 'default') {
-          console.log("No number selected for players");
-        };
-        if (playerNum === 'four') {
-          console.log("Four players selected");
-          return <div>
-          <div id="player2-cat">
-            <p>Player 2 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
-          </div>
-          <div id="player3-cat">
-            <p>Player 3 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player3-select"/>
-          </div>
-          <div id="player4-cat">
-            <p>Player 4 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player4-select"/>
-          </div>
-          </div>
-        };
-        if (playerNum === 'three') {
-          console.log("Three players selected");
-          return <div>
-          <div id="player2-cat">
-            <p>Player 2 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
-          </div>
-          <div id="player3-cat">
-            <p>Player 3 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player3-select"/>
-          </div>
-          </div>
-        };
-        if (playerNum === 'two') {
-          console.log("Three players selected");
-          return <div>
-          <div id="player2-cat">
-            <p>Player 2 Category</p>
-            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} key="player2-select"/>
-          </div>
-          </div>
-        };
-    };
-
-    // When the form is submitted, search the Giphy API for `this.state.search`
-    handleFormSubmit = event => {
+    // showPlayerNum= playerNum => {
+    //     if (playerNum === 'default') {
+    //       console.log("No number selected for players");
+    //     };
+    //     if (playerNum === 'four') {
+    //       console.log("Four players selected");
+    //       return <div>
+    //       <div id="player2-cat">
+    //         <p>Player 2 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
+    //       </div>
+    //       <div id="player3-cat">
+    //         <p>Player 3 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick2} handleChange={this.handleChange} id="player3-select"/>
+    //       </div>
+    //       <div id="player4-cat">
+    //         <p>Player 4 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick3} handleChange={this.handleChange} id="player4-select"/>
+    //       </div>
+    //       </div>
+    //     };
+    //     if (playerNum === 'three') {
+    //       console.log("Three players selected");
+    //       return <div>
+    //       <div id="player2-cat">
+    //         <p>Player 2 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
+    //       </div>
+    //       <div id="player3-cat">
+    //         <p>Player 3 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player3-select"/>
+    //       </div>
+    //       </div>
+    //     };
+    //     if (playerNum === 'two') {
+    //       console.log("Three players selected");
+    //       return <div>
+    //       <div id="player2-cat">
+    //         <p>Player 2 Category</p>
+    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} key="player2-select"/>
+    //       </div>
+    //       </div>
+    //     };
+    // };
+    
+    
+    handleSubmit = event => {
+    // Runs trivia search function on submit
         event.preventDefault();
-        // this.searchTrivia(this.state.search);
-        // this.state.mode = "single";
         console.log(this.state.mode);
-    
-        // this.state.level= "hard";
         console.log(this.state.level);
     
+        // Trivia search runs on submit
         this.searchTrivia();
         console.log(this.state.questions);
-        this.searchTrivia();
-
+        this.gameCreated = true;
+        console.log(this.gameCreated);
     };  
-    
+
+    // The trivia API search will run a specific search based on the mode and difficulty level submitted
     searchTrivia = () => {
-        
-        if (this.state.mode === "single" && this.state.level === "hard") {
-          var query = ".php?amount=20&difficulty=medium"
-          API.searchSingleHard(query)
-            .then(res => this.setState({ questions: res.data.results}))
+        var query = "";
+
+        if (this.state.level === "normal") {
+          //test
+          query = ".php?amount=20&category=" + "10" + "&difficulty=easy&type=multiple";
+
+          // query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy";
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
+            .catch(err => console.log(err));
+        }
+        if (this.state.level === "hard") {
+          query = ".php?amount=20&difficulty=medium&type=multiple";
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
+            .catch(err => console.log(err));
+        }
+        if (this.state.level === "insanity") {
+          query = ".php?amount=20&difficulty=hard&type=multiple"
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
             .catch(err => console.log(err));
         }
     };
@@ -221,8 +242,12 @@ class Userprofile extends Component {
                     <a style={buttonStyle} href="/" className="btn-default btn-sm">Logout</a>
                     </h4>
                 </div>
-                <UserWrapper column>
-                    <Game value={this.state.value} categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories}/>
+                <UserWrapper> 
+                  {this.gameCreated ? 
+                    [<TriviaGame categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>]
+                    :
+                    (<Game categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>)
+                  }
                 </UserWrapper>
             </div>
         );

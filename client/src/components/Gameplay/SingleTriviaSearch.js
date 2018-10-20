@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-// import Categories from "./Categories";
 
 const formStyle = {
   display: 'flex',
@@ -28,46 +27,6 @@ const optionStyle = {
 
 class SingleTriviaSearch extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: 'default',
-  //     name: '',
-  //   };
-  // };
-
-  // handleChange = event => {
-  //   var result = event.target.value;
-  //   console.log(result);
-  //   this.setState({
-  //     value: event.target.value, 
-  //   })
-  //   this.showCategories(result);
-  // };
- 
-  // componentDidUpdate = () => {
-  //   console.log(this.state);
-  // }
-  
-  // showCategories= value => {
-  //   if (value === 'default') {
-  //     console.log("No level choosen");
-  //   };
-  //   if (value === 'hard') {
-  //     console.log("You have choosen: " + value);
-  //   };
-  //   if (value === 'insanity') {
-  //     console.log("You have choosen: " + value);
-  //   }
-  //   if (value === 'normal') {
-  //     console.log("You have choosen normal - now choose categories");
-  //     return  <div key="normal-category">
-  //     <h4>You've choosen normal - choose your categories</h4>
-  //       <Categories categories={this.props.categories} />
-  //     </div>
-  //   };
-  // };
-
   render() {
     
     return (
@@ -94,7 +53,7 @@ class SingleTriviaSearch extends Component {
       </SearchWrapper>
     </div>
     )
-  }
+  };
 };
 
 export default SingleTriviaSearch;

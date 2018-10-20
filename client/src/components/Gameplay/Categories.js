@@ -21,45 +21,27 @@ const optionStyle = {
 
 class Categories extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //       value: 'default',
-    //     };
-    // };
-
-    // handleChange = event => {
-    //     var result = event.target.value;
-    //     console.log(result);
-    //     console.log(typeof result.id)
-    //     this.setState({
-    //       value: event.target.value, 
-    //       key: event.target.key, 
-    //     })
-    //     console.log("Your category is: " + event.target.value);
-    // };
-     
-    // componentDidUpdate = () => {
-    //     console.log(this.state);
-    // }
-
     render () {
         return (
+            <div>
                 <CategoriesWrapper>
-                    <label id="normal-category">
+                    <form>
+                    <label>
                         <h4 style={formStyle}>You've choosen normal - Select Your Category!</h4>
-                        <select id="category" value={this.props.categoryPick} onChange={this.props.handleChange}>
+                        <select id="category" key="category" value={this.props.categoryPick} onChange={this.props.handleChange}>
                             <option style={optionStyle} value='default'></option>
                             {this.props.categories.map(category => (
-                                <option style={optionStyle} value={category.name} key={category.id}>
+                                <option style={optionStyle} value={category.id} key={category.id}>
                                     {category.name}
                                 </option>
                             ))}
                         </select>
                     </label>
+                    </form>
                 </CategoriesWrapper>
-        );
+            </div>
+        )
     }
-}
+};
 
 export default Categories;

@@ -19,93 +19,93 @@ import './App.css';
 import Particles from 'react-particles-js';
 import backgroundImg from './images/q1.png';
 
-const particlesOpt = {
-  particles: {
-    type:"image",
-          image:{
-            src: {backgroundImg},
-            width:100,
-            height:100
-          },
-        opacity:{
-          value:0.5,
-          random:false,
-          anim:{
-            enable:false,
-            speed:1,
-            opacity_min:0.1,
-            sync:false
-          }
-        },
-        size:{
-          value:48.05189604773155,
-          random:true,anim:{
-            enable:false,
-            speed:40,
-            size_min:0.1,
-            sync:false}},
-            line_linked:{
-              enable:false,
-              distance:150,
-              color:"#ffffff",
-              opacity:0.4,
-              width:1},
-              move:{
-                enable:true,
-                speed:6,
-                direction:"none",
-                random:false,
-                straight:false,
-                out_mode:"out",
-                bounce:false,
-                attract:{
-                  enable:false,
-                  rotateX:600,
-                  rotateY:1200
-                }
-              }
-            },
-            interactivity:{
-              detect_on:"canvas",
-              events:{
-                onhover:{
-                  enable:false,
-                  mode:"grab"
-                },
-                onclick:{
-                  enable:true,
-                  mode:"push"
-                },
-                resize:true
-              },
-              modes:{
-                grab:{
-                  distance:0,
-                  line_linked:{
-                    opacity:0
-                  }
-                },
-                bubble:{
-                  distance:400,
-                  size:40,
-                  duration:2,
-                  opacity:8,
-                  speed:3
-                },
-                repulse:{
-                  distance:200,
-                  duration:0.4
-                },
-                push:{
-                  particles_nb:4
-                },
-                remove:{
-                  particles_nb:2
-                }
-              }
-            },
-            retina_detect:true
-}
+// const particlesOpt = {
+//   particles: {
+//     type:"image",
+//           image:{
+//             src: {backgroundImg},
+//             width:100,
+//             height:100
+//           },
+//         opacity:{
+//           value:0.5,
+//           random:false,
+//           anim:{
+//             enable:false,
+//             speed:1,
+//             opacity_min:0.1,
+//             sync:false
+//           }
+//         },
+//         size:{
+//           value:48.05189604773155,
+//           random:true,anim:{
+//             enable:false,
+//             speed:40,
+//             size_min:0.1,
+//             sync:false}},
+//             line_linked:{
+//               enable:false,
+//               distance:150,
+//               color:"#ffffff",
+//               opacity:0.4,
+//               width:1},
+//               move:{
+//                 enable:true,
+//                 speed:6,
+//                 direction:"none",
+//                 random:false,
+//                 straight:false,
+//                 out_mode:"out",
+//                 bounce:false,
+//                 attract:{
+//                   enable:false,
+//                   rotateX:600,
+//                   rotateY:1200
+//                 }
+//               }
+//             },
+//             interactivity:{
+//               detect_on:"canvas",
+//               events:{
+//                 onhover:{
+//                   enable:false,
+//                   mode:"grab"
+//                 },
+//                 onclick:{
+//                   enable:true,
+//                   mode:"push"
+//                 },
+//                 resize:true
+//               },
+//               modes:{
+//                 grab:{
+//                   distance:0,
+//                   line_linked:{
+//                     opacity:0
+//                   }
+//                 },
+//                 bubble:{
+//                   distance:400,
+//                   size:40,
+//                   duration:2,
+//                   opacity:8,
+//                   speed:3
+//                 },
+//                 repulse:{
+//                   distance:200,
+//                   duration:0.4
+//                 },
+//                 push:{
+//                   particles_nb:4
+//                 },
+//                 remove:{
+//                   particles_nb:2
+//                 }
+//               }
+//             },
+//             retina_detect:true
+// }
 
 const Logo = styled('div')({
   fontSize: '40px',
@@ -229,9 +229,9 @@ class App extends Component {
               <Route path="/userprofile" component={Userprofile} username={this.state.username}/>
             
             </Switch>
-              <Particles
-              params={particlesOpt}
-            />
+              {/* <Particles
+              params={particlesOpt} */}
+            {/* /> */}
           </Content>
           
         </div>
