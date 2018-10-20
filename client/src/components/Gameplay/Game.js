@@ -36,6 +36,7 @@ class Game extends Component {
       <br/>
       <div>
       {this.props.showMode(this.props.mode)}
+      {this.props.showCategories(this.props.level)}
       </div>
       </GameWrapper>
     );

@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // require for passport
-app.use(session({ cookie: { maxAge: 60000 }})); // session secret
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })) // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

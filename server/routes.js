@@ -1,11 +1,5 @@
-module.exports = function(app, passport) {
 
-  // =====================================
-  // HOME PAGE (with login links) ========
-  // =====================================
-  // app.get('/gameplay', function(req, res) {
-  //     res.render('gameplay.js'); // load the gameplay.js file
-  // });
+module.exports = function(app, passport) {
 
   app.get('/gameplay', function(req, res) {
     req.flash({ message: req.flash(['loginMessage', 'registrationMessage'])} )
@@ -22,7 +16,7 @@ module.exports = function(app, passport) {
 
   // Registration ===============================
   // process the registration form
-  app.post('/api/register', passport.authenticate('local-register', {
+  app.post('/register', passport.authenticate('local-register', {
     successRedirect : '/userprofile', // redirect to the secure profile section
     failureRedirect : '/gameplay', // redirect back to the gameplay page if there is an error
     failureFlash : true // allow flash messages
@@ -30,15 +24,29 @@ module.exports = function(app, passport) {
 
   // LOGIN ===============================
   // process the login form
-  app.post('/api/login', 
-  passport.authenticate('local-login', { 
-    successRedirect : '/userprofile', // redirect to the secure profile section
-    failureRedirect: '/gameplay', 
-    failureFlash : true // allow flash messages
-  // }),
-  // function(req, res) {
-  //   res.redirect('/');
-  }));  
+  app.post('/login', ((req, res, next) => {
+    passport.authenticate('local-login', (err, user, info) => {
+      if (err) { 
+        return next(err); 
+      }
+      if (!user) { 
+        return res.redirect('/gameplay'); 
+      }
+      req.logIn(user, function(err) {
+        if (err) { 
+          return next(err); 
+        }
+        return res.redirect('/userprofile');
+      });
+      })(req, res, next);
+  }));
+  //     if (err)
+  //       console.log('Error in login', user, info)
+  //       // console.log('/login response')
+  //   }),
+  //   function(req, res) { 
+  //   res.redirect('/userprofile') // redirect to the secure profile section
+  // });  
   
   // LOGOUT ==============================
   app.get('/logout', function(req, res) {

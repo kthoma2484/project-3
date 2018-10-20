@@ -21,18 +21,20 @@ class TriviaGame extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          value: ""
+         
         };
     };
 
     handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-        [name]: value
-        });
-
-        this.setState({value: event.target.value});
-        this.activeGame(value);
+        console.log('change event', event.target.value)
+        if (event.target.value === 'correct') {
+            this.props.updateScore(true)
+        } else {
+            this.props.updateScore(false)
+        }
+       // const value = ta
+       // this.setState({value: event.target.value});
+        //this.activeGame(value);
     };
 
     activeGame = value => {
@@ -51,7 +53,7 @@ class TriviaGame extends Component {
         return (
             <div style={gameStyle}>
             <TriviaWrapper column>
-                <Questions value={this.state.value} activeGame={this.activeGame} categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
+                <Questions activeGame={this.activeGame} categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} score={this.props.score} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
             </TriviaWrapper>
             </div>
         )

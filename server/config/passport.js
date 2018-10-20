@@ -44,23 +44,32 @@ module.exports = function(passport) {
                         'username': username, 
                         'password': password 
                         }
-                    }, 
-                    function(err, player) {
+                    })
+                    .then((player, err) => {
                     // if there are any errors, return the error
-                    if (err)
-                    return done(err);
+                    console.log("!!!!", player)
+                    console.log("!!!username:", username)
+                    if (err) {
+                        console.log('ERROR!', err)
+                        return done(err);
+                    }
+                    
                     // if no user is found, return the message
-                    if (!player.username) 
-                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.')); // req.flash is the way to set flashdata using connect-flash'));
+                    if (!player.username) {
+                        console.log('in valid username')
+                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
+                    } // req.flash is the way to set flashdata using connect-flash'));
 
                     // if the user is found but the password is wrong
-                    if (!player.validPassword(password))
-                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.')); // create the loginMessage and save it to session as flashdata
+                    if (!player.validPassword(password)){
+                        console.log('hi')
+                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
+                    } // create the loginMessage and save it to session as flashdata
                 
                     //if login is good, return succesful user
                     console.log("user: " + username + " found")
                     return done(null, player);
-                });
+                })
             });  
         })
     );
@@ -95,8 +104,7 @@ module.exports = function(passport) {
 
                 // set the player's local credentials
                 newPlayer.username = username;
-                newPlayer.password = password;
-                // newPlayer.password = newPlayer.generateHash(password);
+                newPlayer.password = newPlayer.generateHash(password);
 
                 // save the player
                 newPlayer.save(function(err) {

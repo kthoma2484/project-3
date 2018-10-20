@@ -139,16 +139,18 @@ class App extends Component {
   };
   
   handleSubmit = event => {
-    var apiBaseUrl = "http://localhost:3001/api";
+    console.log("running request")
+    var apiBaseUrl = "http://localhost:3001";
     var payload={
     "username":this.state.username,
     "password":this.state.password
     };
     
+    console.log("!!!!", payload )
     axios.post(apiBaseUrl+'/login', payload)
     .then(response => {
     console.log(response);
-    //console.log("code is: " + response.status)
+    console.log("code is: " + response.status)
     if(response.status === 200){
     console.log("Login successfull");
     this.setState({ loggedIn : true });
@@ -168,7 +170,7 @@ class App extends Component {
   };
 
   handleClick = event => {
-    var apiBaseUrl = "http://localhost:3001/api";
+    var apiBaseUrl = "http://localhost:3001";
     console.log("values",this.state.username,this.state.email,this.state.password);
     //To be done:check for empty values before hitting submit
     var self = this;
