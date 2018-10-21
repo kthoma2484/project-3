@@ -55,19 +55,19 @@ module.exports = function(passport) {
                     }
                     
                     // if no user is found, return the message
-                    if (!player.username) {
-                        console.log('in valid username')
+                    if (!player) {
+                        console.log('That username and/or password is incorrect.')
                         return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
                     } // req.flash is the way to set flashdata using connect-flash'));
 
-                    // if the user is found but the password is wrong
-                    if (!player.validPassword(password)){
-                        console.log('hi')
-                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
-                    } // create the loginMessage and save it to session as flashdata
+                    // // if the user is found but the password is wrong
+                    // if (!player.password){
+                    //     console.log('hi')
+                    //     return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
+                    // } // create the loginMessage and save it to session as flashdata
                 
                     //if login is good, return succesful user
-                    console.log("user: " + username + " found")
+                    console.log("User: " + username + " found!")
                     return done(null, player);
                 })
             });  
@@ -104,7 +104,8 @@ module.exports = function(passport) {
 
                 // set the player's local credentials
                 newPlayer.username = username;
-                newPlayer.password = newPlayer.generateHash(password);
+                newPlayer.password = password;
+                // newPlayer.password = newPlayer.generateHash(password);
 
                 // save the player
                 newPlayer.save(function(err) {

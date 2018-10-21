@@ -55,14 +55,14 @@ module.exports = function(sequelize, DataTypes) {
     });
 
   // generating a hash
-  Player.prototype.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-  };
+  // Player.prototype.generateHash = function(password) {
+  //   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  // };
 
   // checking if password is valid
-  Player.prototype.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
-  };
+  // Player.prototype.validPassword = function(password) {
+  //   return bcrypt.compareSync(password, .password);
+  // };
 
   return Player;
   };

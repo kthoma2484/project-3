@@ -1,3 +1,5 @@
+// Load up the player model
+var db = require('./models');
 
 module.exports = function(app, passport) {
 
@@ -9,10 +11,16 @@ module.exports = function(app, passport) {
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   app.get('/userprofile', isLoggedIn, function(req, res) {
-      res.render('Userprofile.js', {
-          username : req.username // get the player out of session and pass to template
-      });
-  });
+    db.Player.findOne({ 
+      where: { 
+          'username': req.username, 
+          }
+      })
+      .then((username => {   
+          console.log(username.username) // get the player out of session and pass to template
+      })
+  )});
+
 
   // Registration ===============================
   // process the registration form
@@ -40,14 +48,7 @@ module.exports = function(app, passport) {
       });
       })(req, res, next);
   }));
-  //     if (err)
-  //       console.log('Error in login', user, info)
-  //       // console.log('/login response')
-  //   }),
-  //   function(req, res) { 
-  //   res.redirect('/userprofile') // redirect to the secure profile section
-  // });  
-  
+    
   // LOGOUT ==============================
   app.get('/logout', function(req, res) {
       req.logout();

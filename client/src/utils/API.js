@@ -7,4 +7,6 @@ export default {
   searchTriviaApi: function(query) {
     return axios.get(BASEURL + query);
   }
+
+  
 };

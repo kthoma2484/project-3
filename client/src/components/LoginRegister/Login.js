@@ -46,7 +46,7 @@ class Login extends Component {
             </label>
             <br/>
             <input style={formStyle}
-            type="text"
+            type="password"
             name="password"
             value={this.props.password}
             onChange = {this.props.handleInputChange}  

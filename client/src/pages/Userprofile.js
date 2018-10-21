@@ -39,6 +39,7 @@ class Userprofile extends Component {
         super(props);
         this.gameCreated = false
         this.state = {
+          username: "",
           categories: [
             {"id": 9, "name": "General Knowledge"},
             {"id": 10, "name": "Entertainment: Books"},
@@ -245,7 +246,7 @@ class Userprofile extends Component {
                 <div style={userWelcome}>
                     <h4> 
                     Welcome User 
-                    {/* {this.props.username} */}
+                    {this.state.username}
                     !
                     <a style={buttonStyle} href="/" className="btn-default btn-sm">Logout</a>
                     </h4>
