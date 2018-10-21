@@ -89,7 +89,7 @@ class Userprofile extends Component {
             this.showMode(value);
         }
         // Sets state difficulty level on selection
-        if (event.target.id === 's-level') {
+        if (event.target.id === 's-level' || event.target.id === 'm-level') {
             this.setState({level: event.target.value});
             this.showCategories(value);
         }
@@ -99,7 +99,7 @@ class Userprofile extends Component {
             // this.showPlayerNum(value);
         }
         // Sets category pick for trivia search with easy level selection
-        if (event.target.className === 'category') {
+        if (event.target.id === 'category') {
             this.setState({categoryPick: event.target.value});
         }
 
@@ -118,7 +118,7 @@ class Userprofile extends Component {
         };
         if (level === 'normal') { 
           console.log("!!!!!You have choosen difficulty level normal - now choose your category");
-          return <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange}/>
+          return <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         };
     };
     
@@ -146,15 +146,15 @@ class Userprofile extends Component {
     //       return <div>
     //       <div id="player2-cat">
     //         <p>Player 2 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
+    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player2-select"/>
     //       </div>
     //       <div id="player3-cat">
     //         <p>Player 3 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick2} handleChange={this.handleChange} id="player3-select"/>
+    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player3-select"/>
     //       </div>
     //       <div id="player4-cat">
     //         <p>Player 4 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick3} handleChange={this.handleChange} id="player4-select"/>
+    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player4-select"/>
     //       </div>
     //       </div>
     //     };
@@ -202,7 +202,7 @@ class Userprofile extends Component {
 
         if (this.state.level === "normal") {
           //test
-          query = ".php?amount=20&category=" + "10" + "&difficulty=easy&type=multiple";
+          query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy&type=multiple";
 
           // query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy";
           API.searchTriviaApi(query)
@@ -230,7 +230,7 @@ class Userprofile extends Component {
                 ? 0
                 : this.state.score - 1 })
     
-      // When this component mounts, search the trivia categories
+    // When this component mounts, search the trivia categories
     componentDidMount = () => {
         // this.searchTrivia();
         // this.handleFormSubmit();
@@ -255,7 +255,7 @@ class Userprofile extends Component {
                   {this.gameCreated ? 
                     <TriviaGame categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} score={this.state.score} updateScore={this.updateScore} handleSubmit={this.handleSubmit}/>
                     :
-                    <Game categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
+                    <Game categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showPlayerNum={this.showPlayerNum} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
                   }
                 </UserWrapper>
             </div>

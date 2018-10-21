@@ -16,11 +16,6 @@ const SearchWrapper = styled('div')({
   margin: 20,
 })
 
-const buttonStyle = {
-  color: 'darkblue',
-  margin: 15,
-};
-
 const optionStyle = {
   color: 'black'
 };
@@ -31,7 +26,7 @@ class MultiTriviaSearch extends Component {
     
     return (
     <div>
-      <SearchWrapper>
+      <SearchWrapper column>
       <h2>Multi-Player Mode</h2>
       <h4>Difficulty Level</h4>
       <form onSubmit={this.handleSubmit}>
@@ -55,9 +50,7 @@ class MultiTriviaSearch extends Component {
           </select>
         </label>
         <br/>
-        {this.props.showCategories(this.props.level)}
       </form>
-      <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>
       </SearchWrapper>
     </div>
     )

@@ -15,6 +15,10 @@ const TriviaWrapper = styled('div')({
     justifyContent: 'center',
 })
 
+const buttonStyle = {
+    color: 'darkblue',
+    margin: '15px 0',
+};
 
 class TriviaGame extends Component {
 
@@ -52,9 +56,12 @@ class TriviaGame extends Component {
 
         return (
             <div style={gameStyle}>
-            <TriviaWrapper column>
-                <Questions activeGame={this.activeGame} categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} score={this.props.score} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
-            </TriviaWrapper>
+                <a style={buttonStyle} href="/userprofile" className="btn-default btn-sm">New Game</a>
+                <div>
+                    <TriviaWrapper column>
+                        <Questions activeGame={this.activeGame} categories={this.props.categories} questions={this.props.questions}mode={this.props.mode} level={this.props.level} playerNum={this.props.playerNum} categoryPick={this.props.categoryPick} score={this.props.score} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
+                    </TriviaWrapper>
+                </div>
             </div>
         )
     }       

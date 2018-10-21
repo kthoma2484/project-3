@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 // import styled from 'react-emotion';
 
+const formStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  };
 
 class Questions extends Component {
 
@@ -18,7 +23,7 @@ class Questions extends Component {
   render() {
 
     return (
-        <form onSubmit={this.props.handleSubmit}>
+        <form  style={formStyle} onSubmit={this.props.handleSubmit}>
             <h1>Score: { this.props.score }</h1>
             {
                 this.questions.map((question, i) => (

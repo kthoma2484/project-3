@@ -18,6 +18,12 @@ const optionStyle = {
   color: 'black'
 }; 
 
+const buttonStyle = {
+  color: 'darkblue',
+  margin: 'auto 0',
+
+};
+
 class Game extends Component {
 
   render() {
@@ -31,13 +37,19 @@ class Game extends Component {
             <option style={optionStyle} value='singleMode'>Single Player Mode</option>
             <option style={optionStyle} value='multiMode'>Multi-Player Mode</option>
           </select>
+          <div>
+            {this.props.showMode(this.props.mode)}
+            {this.props.showCategories(this.props.level)}
+            <br/>
+            {this.props.level && this.props.mode ?
+              <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>
+              :
+              null
+            }
+          </div>
         </label>
       </form>
       <br/>
-      <div>
-      {this.props.showMode(this.props.mode)}
-      {this.props.showCategories(this.props.level)}
-      </div>
       </GameWrapper>
     );
   }

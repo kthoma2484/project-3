@@ -28,8 +28,8 @@ class Categories extends Component {
                     <form>
                     <label>
                         <h4 style={formStyle}>You've choosen normal - Select Your Category!</h4>
-                        <select id="category" key="category" value={this.props.categoryPick} onChange={this.props.handleChange}>
-                            <option style={optionStyle} value='default'></option>
+                        <select style={optionStyle} id="category" key="category" value={this.props.categoryPick} onChange={this.props.handleChange}>
+                            <option style={optionStyle} value='default' key='default1'>Choose Your Category:</option>
                             {this.props.categories.map(category => (
                                 <option style={optionStyle} value={category.id} key={category.id}>
                                     {category.name}
