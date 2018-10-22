@@ -69,8 +69,8 @@ class Userprofile extends Component {
           categoryPick: '',
           questions: [],
           mode: '',
-          level: '',
-          playerNum: '',
+          level: 'default',
+          playerNum: 'default',
           score: 0,
           key: '',
         };
@@ -83,6 +83,12 @@ class Userprofile extends Component {
         [name]: value
         });
 
+        //===============================================================
+        // GAME OPTIONS
+        //===============================================================
+        if (this.state.mode === 'default' || this.state.level === 'default') {
+            console.log('default selected');
+        }
         // Sets state player mode on selection
         if (event.target.id === 'mode') {
             this.setState({mode: event.target.value});
@@ -102,6 +108,12 @@ class Userprofile extends Component {
         if (event.target.id === 'category') {
             this.setState({categoryPick: event.target.value});
         }
+
+
+        //================================================================
+        // USER UPDATES
+        //================================================================
+        
 
     };
     
@@ -223,12 +235,15 @@ class Userprofile extends Component {
         }
     };
 
-    updateScore = isCorrect => this.setState({
+    updateScore = isCorrect => this.setState(
+        {
         score: isCorrect
             ? this.state.score + 1
             : this.state.score === 0
                 ? 0
-                : this.state.score - 1 })
+                : this.state.score - 1 
+        }
+    )
     
     // When this component mounts, search the trivia categories
     componentDidMount = () => {

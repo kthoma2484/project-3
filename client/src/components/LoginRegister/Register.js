@@ -36,7 +36,7 @@ class Register extends Component {
                 </label>
                 <br/>
                 <input style={formStyle}
-                  type="text"
+                  type="email"
                   name="email"
                   value={this.props.email}
                   onChange= {this.props.handleInputChange}>
@@ -58,7 +58,7 @@ class Register extends Component {
                 </label>
                 <br/>
                   <input style={formStyle}
-                  type="text"
+                  type="password"
                   name="password"
                   value={this.props.password}
                   onChange = {this.props.handleInputChange}  

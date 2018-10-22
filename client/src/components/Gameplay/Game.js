@@ -39,12 +39,16 @@ class Game extends Component {
           </select>
           <div>
             {this.props.showMode(this.props.mode)}
-            {this.props.showCategories(this.props.level)}
-            <br/>
-            {this.props.level && this.props.mode ?
-              <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>
+            {this.props.level === "normal" ?
+              this.props.showCategories(this.props.level)
               :
               null
+            }
+            <br/>
+            {this.props.level === 'default' || this.props.mode === 'default' ?
+              null
+              :
+              <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>  
             }
           </div>
         </label>

@@ -4,6 +4,9 @@ var LocalStrategy = require('passport-local').Strategy;
 // Load up the player model
 var db = require('../models');
 
+// Import dependency
+var bcrypt   = require('bcrypt-nodejs');
+
 // Expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -42,33 +45,29 @@ module.exports = function(passport) {
                 db.Player.findOne({ 
                     where: { 
                         'username': username, 
-                        'password': password 
                         }
                     })
                     .then((player, err) => {
                     // if there are any errors, return the error
-                    console.log("!!!!", player)
+                    // console.log("!!!!", player)
                     console.log("!!!username:", username)
                     if (err) {
-                        console.log('ERROR!', err)
+                        console.log('ERROR!', err);
                         return done(err);
                     }
                     
                     // if no user is found, return the message
                     if (!player) {
-                        console.log('That username and/or password is incorrect.')
-                        return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
-                    } // req.flash is the way to set flashdata using connect-flash'));
-
-                    // // if the user is found but the password is wrong
-                    // if (!player.password){
-                    //     console.log('hi')
-                    //     return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
-                    // } // create the loginMessage and save it to session as flashdata
-                
-                    //if login is good, return succesful user
-                    console.log("User: " + username + " found!")
-                    return done(null, player);
+                        console.log('That username is incorrect.');
+                        // return done(null, false, req.flash('loginMessage', 'That username and/or password is incorrect.'));
+                    }  
+                    //if username is good, check the encrypted password
+                    else if (bcrypt.compareSync(password, player.password)) {
+                        console.log("User: " + username + " found!");
+                        return done(null, player);
+                    } else {
+                        console.log('That password is incorrect.');
+                    } 
                 })
             });  
         })
@@ -104,7 +103,7 @@ module.exports = function(passport) {
 
                 // set the player's local credentials
                 newPlayer.username = username;
-                newPlayer.password = password;
+                newPlayer.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
                 // newPlayer.password = newPlayer.generateHash(password);
 
                 // save the player

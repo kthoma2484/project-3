@@ -14,7 +14,7 @@ const SearchWrapper = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   margin: 20,
-})
+});
 
 const optionStyle = {
   color: 'black'
@@ -29,7 +29,6 @@ class MultiTriviaSearch extends Component {
       <SearchWrapper column>
       <h2>Multi-Player Mode</h2>
       <h4>Difficulty Level</h4>
-      <form onSubmit={this.handleSubmit}>
         <label style={formStyle}>
           <h4 style={formStyle}>Select Your Difficulty</h4>
           <select style={optionStyle} id="m-level" value={this.props.level} onChange={this.props.handleChange}>
@@ -50,7 +49,6 @@ class MultiTriviaSearch extends Component {
           </select>
         </label>
         <br/>
-      </form>
       </SearchWrapper>
     </div>
     )

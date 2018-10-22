@@ -56,29 +56,21 @@ class App extends Component {
     "password":this.state.password
     };
     
-    console.log("!!!!", payload )
     axios.post(apiBaseUrl+'/login', payload)
     .then(response => {
-    console.log(response);
-    console.log("code is: " + response.status)
-    if(response.status === 200){
-    console.log("Login successfull");
-    this.setState({ 
-      loggedIn : true 
-    });
-    }
-    else if(response.status === 204){
-    console.log("Username password do not match");
-    alert("Username password do not match")
-    }
-    else{
-    console.log("Username does not exists");
-    alert("Username does not exist");
-    }
+      console.log(response);
+      console.log("code is: " + response.status)
+      if (response.status === 302 || response.status === 200){
+        console.log("Login successfull");
+        this.setState({ 
+          loggedIn : true 
+        });
+      }
     })
     .catch(function (error) {
-    console.log(error);
+      console.log(error);
     });
+    console.log("request done");
   };
 
   handleClick = event => {
@@ -119,7 +111,7 @@ class App extends Component {
   };
 
   componentDidUpdate = () => {
-    console.log(this.state);
+    console.log('state-updated');
   };
 
   render() {
@@ -142,13 +134,8 @@ class App extends Component {
                 } />
               <Route path="/highscore" component={Highscore} />
               <Route path="/userprofile" component={Userprofile} username={this.state.username} password={this.state.password} email={this.state.email}/>
-            
             </Switch>
-              {/* <Particles
-              params={particlesOpt} */}
-            {/* /> */}
-          </Content>
-          
+          </Content> 
         </div>
       </Router>
     );

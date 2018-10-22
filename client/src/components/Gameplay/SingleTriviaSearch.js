@@ -29,7 +29,6 @@ class SingleTriviaSearch extends Component {
       <SearchWrapper column>
         <h2>Single Player Mode</h2>
         <h4>Difficulty Level</h4>
-        <form>
           <label style={formStyle}>
             <h4 style={formStyle}>Select Your Difficulty</h4>
             <select style={optionStyle} id="s-level" value={this.props.level} onChange={this.props.handleChange}>
@@ -40,7 +39,6 @@ class SingleTriviaSearch extends Component {
             </select>
           </label>
           <br/>
-        </form>
       </SearchWrapper>
     </div>
     )

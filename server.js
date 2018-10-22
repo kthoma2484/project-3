@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport');
+const routes = require("./server/routes");
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -47,7 +48,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-require("./server/routes.js")(app, passport); // load our routes and pass in our app and fully configured passport
+require("./server/routes/useraccess-api.js")(app, passport); // load our routes and pass in our app and fully configured passport
+require("./server/routes/player-api.js")(app, passport);
+require("./server/routes/gameplayer-api.js")(app);
+require("./server/routes/game-api.js")(app);
 
 // Send every other request to the React app
 // Define any API routes before this runs

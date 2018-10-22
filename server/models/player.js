@@ -1,5 +1,3 @@
-var bcrypt   = require('bcrypt-nodejs');
-
 module.exports = function(sequelize, DataTypes) {
 
   var Player = sequelize.define("Player", {
@@ -53,16 +51,6 @@ module.exports = function(sequelize, DataTypes) {
       timestamp: DataTypes.DATE,
       createdAt: DataTypes.DATE, 
     });
-
-  // generating a hash
-  // Player.prototype.generateHash = function(password) {
-  //   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-  // };
-
-  // checking if password is valid
-  // Player.prototype.validPassword = function(password) {
-  //   return bcrypt.compareSync(password, .password);
-  // };
 
   return Player;
   };
