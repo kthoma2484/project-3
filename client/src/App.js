@@ -50,7 +50,7 @@ class App extends Component {
     event.preventDefault();
 
     console.log("running request")
-    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
+    var apiBaseUrl = "http://localhost:3001";
     var payload={
     "username":this.state.username,
     "password":this.state.password
@@ -74,7 +74,7 @@ class App extends Component {
   };
 
   handleClick = event => {
-    var apiBaseUrl = "http://localhost:3001";
+    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
     // console.log("values",this.state.username,this.state.email,this.state.password);
     var self = this;
     var payload={
