@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'react-emotion';
 import Game from '../components/Gameplay/Game';
 import Categories from "../components/Gameplay/Categories";
@@ -6,6 +7,8 @@ import SingleTriviaSearch from "../components/Gameplay/SingleTriviaSearch";
 import MultiTriviaSearch from "../components/Gameplay/MultiTriviaSearch";
 import TriviaGame from "../components/Gameplay/TriviaGame";
 import API from "../utils/API";
+import { connect } from 'react-redux'
+import { createPlayer } from '../store/actions/playerActions'
 
 const UserWrapper = styled('div')({
     display: 'flex',
@@ -17,6 +20,19 @@ const UserWrapper = styled('div')({
     margin: "0 auto",
     maxWidth: "800px",
 });
+
+
+// const Footer = styled('div')({
+//     fontSize: '24px',
+//     color: "rgba(133, 232, 58, .8)",
+//     boxShadow: '5px 5px solid black',
+//     margin: 10,
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif',
+//     marginBottom: '10'
+// });
 
 const divStyle = {
     margin: '20px',
@@ -39,6 +55,7 @@ class Userprofile extends Component {
         super(props);
         this.gameCreated = false
         this.state = {
+          isloggedin: true,
           username: "",
           categories: [
             {"id": 9, "name": "General Knowledge"},
@@ -72,9 +89,12 @@ class Userprofile extends Component {
           level: 'default',
           playerNum: 'default',
           score: 0,
+          singlescore: 0,
+          multiplayscore: 0,
           key: '',
+          redirect: false
         };
-      };
+    };
 
     // Changes state based on selections and runs functions after state changed
     handleChange = event => {
@@ -84,7 +104,7 @@ class Userprofile extends Component {
         });
 
         //===============================================================
-        // GAME OPTIONS
+        // GAME HANDLECHANGE RENDERS
         //===============================================================
         if (this.state.mode === 'default' || this.state.level === 'default') {
             console.log('default selected');
@@ -111,12 +131,84 @@ class Userprofile extends Component {
 
 
         //================================================================
-        // USER UPDATES
+        // USER UPDATES HANDLECHANGE RENDERS
         //================================================================
+        
         
 
     };
     
+    handleSubmit = event => {
+        
+        //===============================================================
+        // Game-General
+        //===============================================================
+        // Runs trivia search function on submit
+        event.preventDefault();
+        console.log(this.state.mode);
+        console.log(this.state.level);
+    
+        // Trivia search runs on submit
+        if (event.target.id === 'triviaSearch') {
+        this.searchTrivia();
+        console.log(this.state.questions);
+        this.gameCreated = true;
+        console.log(this.gameCreated);
+        }
+
+        //===============================================================
+        // User-Specific
+        //===============================================================
+        // Set user new singlescore or multiplyscore
+        if (event.target.id === 'finishTrivia') {
+        console.log('singlescore:', this.state.singlescore);
+        // console.log('multiplayscore:', this.state.multiplayscore);
+
+        this.setState({
+            singlescore: this.state.singlescore + this.state.score
+        }) 
+        console.log('updated ', this.state.singlescore);
+        console.log('updated state ', this.state)
+        this.setState({
+            score: 0,
+        })  
+        this.setRedirect();
+        }
+        
+        //
+        // this.props.createPlayer()
+    };  
+
+    //===============================================================
+    // GAME OPTION METHODS
+    //===============================================================
+    // The trivia API search will run a specific search based on the mode and difficulty level submitted
+    searchTrivia = () => {
+        var query = "";
+
+        if (this.state.level === "normal") {
+          //test
+          query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy&type=multiple";
+
+          // query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy";
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
+            .catch(err => console.log(err));
+        }
+        if (this.state.level === "hard") {
+          query = ".php?amount=20&difficulty=medium&type=multiple";
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
+            .catch(err => console.log(err));
+        }
+        if (this.state.level === "insanity") {
+          query = ".php?amount=20&difficulty=hard&type=multiple"
+          API.searchTriviaApi(query)
+            .then(res => this.setState({questions: res.data.results}))
+            .catch(err => console.log(err));
+        }
+    };
+
     // Displays category dropdown if normal level selected
     showCategories= level => {
         if (level === 'default') {
@@ -149,102 +241,90 @@ class Userprofile extends Component {
         };
     };
     
-    // showPlayerNum= playerNum => {
-    //     if (playerNum === 'default') {
-    //       console.log("No number selected for players");
-    //     };
-    //     if (playerNum === 'four') {
-    //       console.log("Four players selected");
-    //       return <div>
-    //       <div id="player2-cat">
-    //         <p>Player 2 Category</p>
-    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player2-select"/>
-    //       </div>
-    //       <div id="player3-cat">
-    //         <p>Player 3 Category</p>
-    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player3-select"/>
-    //       </div>
-    //       <div id="player4-cat">
-    //         <p>Player 4 Category</p>
-    //         <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player4-select"/>
-    //       </div>
-    //       </div>
-    //     };
-    //     if (playerNum === 'three') {
-    //       console.log("Three players selected");
-    //       return <div>
-    //       <div id="player2-cat">
-    //         <p>Player 2 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
-    //       </div>
-    //       <div id="player3-cat">
-    //         <p>Player 3 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player3-select"/>
-    //       </div>
-    //       </div>
-    //     };
-    //     if (playerNum === 'two') {
-    //       console.log("Three players selected");
-    //       return <div>
-    //       <div id="player2-cat">
-    //         <p>Player 2 Category</p>
-    //         <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} key="player2-select"/>
-    //       </div>
-    //       </div>
-    //     };
-    // };
-    
-    
-    handleSubmit = event => {
-    // Runs trivia search function on submit
-        event.preventDefault();
-        console.log(this.state.mode);
-        console.log(this.state.level);
-    
-        // Trivia search runs on submit
-        this.searchTrivia();
-        console.log(this.state.questions);
-        this.gameCreated = true;
-        console.log(this.gameCreated);
-    };  
-
-    // The trivia API search will run a specific search based on the mode and difficulty level submitted
-    searchTrivia = () => {
-        var query = "";
-
-        if (this.state.level === "normal") {
-          //test
-          query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy&type=multiple";
-
-          // query = ".php?amount=20&category=" + this.state.categoryPick + "&difficulty=easy";
-          API.searchTriviaApi(query)
-            .then(res => this.setState({questions: res.data.results}))
-            .catch(err => console.log(err));
-        }
-        if (this.state.level === "hard") {
-          query = ".php?amount=20&difficulty=medium&type=multiple";
-          API.searchTriviaApi(query)
-            .then(res => this.setState({questions: res.data.results}))
-            .catch(err => console.log(err));
-        }
-        if (this.state.level === "insanity") {
-          query = ".php?amount=20&difficulty=hard&type=multiple"
-          API.searchTriviaApi(query)
-            .then(res => this.setState({questions: res.data.results}))
-            .catch(err => console.log(err));
-        }
+    showPlayerNum= playerNum => {
+        if (playerNum === 'default') {
+          console.log("No number selected for players");
+        };
+        if (playerNum === 'four') {
+          console.log("Four players selected");
+          return <div>
+          <div id="player2-cat">
+            <p>Player 2 Category</p>
+            <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player2-select"/>
+          </div>
+          <div id="player3-cat">
+            <p>Player 3 Category</p>
+            <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player3-select"/>
+          </div>
+          <div id="player4-cat">
+            <p>Player 4 Category</p>
+            <Categories level={this.state.level} categories={this.state.categories} categoryPick={this.state.categoryPick} handleChange={this.handleChange} handleSubmit={this.handleSubmit} id="player4-select"/>
+          </div>
+          </div>
+        };
+        if (playerNum === 'three') {
+          console.log("Three players selected");
+          return <div>
+          <div id="player2-cat">
+            <p>Player 2 Category</p>
+            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player2-select"/>
+          </div>
+          <div id="player3-cat">
+            <p>Player 3 Category</p>
+            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} id="player3-select"/>
+          </div>
+          </div>
+        };
+        if (playerNum === 'two') {
+          console.log("Three players selected");
+          return <div>
+          <div id="player2-cat">
+            <p>Player 2 Category</p>
+            <Categories categories={this.props.categories} categoryPick={this.props.categoryPick} handleChange={this.handleChange} key="player2-select"/>
+          </div>
+          </div>
+        };
     };
 
-    updateScore = isCorrect => this.setState(
-        {
-        score: isCorrect
-            ? this.state.score + 1
-            : this.state.score === 0
-                ? 0
-                : this.state.score - 1 
+    //===============================================================
+    // USER ACTIVE-PLAY METHODS
+    //===============================================================
+    // Updates player score each game
+    updateScore = isCorrect => {
+        
+        if (this.state.level === 'normal') {
+            this.setState({
+                score: this.state.score + 1
+            })
+            console.log(this.state.score)
         }
-    )
-    
+        if (this.state.level === 'hard') {
+            (isCorrect => this.setState(
+                {
+                score: isCorrect
+                    ? this.state.score + 1
+                    : this.state.score === 0
+                        ? 0
+                        : this.state.score - 1 
+            }))
+        }
+    }
+
+    // Functions to redirect to game selection for userprofile
+    setRedirect = () => {
+        this.setState({
+          redirect: true
+        })
+    }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+        return <Redirect to='/userprofile' />
+        }
+    }
+
+    //===============================================================
+    // COMPONENT METHODS
+    //===============================================================
     // When this component mounts, search the trivia categories
     componentDidMount = () => {
         // this.searchTrivia();
@@ -256,26 +336,39 @@ class Userprofile extends Component {
     };
 
     render() {
+        console.log('!!!!!!!!!', this.props)
         return (
             <div style={divStyle}>
                 <div style={userWelcome}>
                     <h4> 
-                    Welcome User 
-                    {this.state.username}
-                    !
+                    Welcome User <em>{this.props.username}</em>!
                     <a style={buttonStyle} href="/" className="btn-default btn-sm">Logout</a>
                     </h4>
                 </div>
                 <UserWrapper> 
                   {this.gameCreated ? 
-                    <TriviaGame categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} score={this.state.score} updateScore={this.updateScore} handleSubmit={this.handleSubmit}/>
+                    <TriviaGame isloggedIn={this.state.isloggedIn} singlescore={this.state.singlescore} multiplayscore={this.state.multiplayscore} categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} redirect={this.state.redirect} handleChange={this.handleChange} showMode={this.showMode} showCategories={this.showCategories} score={this.state.score} updateScore={this.updateScore} handleSubmit={this.handleSubmit} redirect={this.renderRedirect}/>
                     :
                     <Game categories={this.state.categories} questions={this.state.questions} mode={this.state.mode} level={this.state.level} playerNum={this.state.playerNum} categoryPick={this.state.categoryPick} handleChange={this.handleChange} showMode={this.showMode} showPlayerNum={this.showPlayerNum} showCategories={this.showCategories} handleSubmit={this.handleSubmit}/>
                   }
                 </UserWrapper>
+                {this.renderRedirect()}
             </div>
         );
       }
     }
     
-export default Userprofile
+    // const mapStateToProps = (state) => {
+    //     return {
+    //         players: state.players.players
+    //     }
+    // }
+
+    // const mapDispatchToProps = (dispatch) => {
+    //     return {
+    //         createPlayer: (player) => dispatch(createPlayer(player))
+    //     }
+    // }
+export default 
+// connect(mapStateToProps, mapDispatchToProps)
+(Userprofile)

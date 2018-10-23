@@ -14,6 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       },
       createdAt: DataTypes.DATE, 
+      updatedAt: DataTypes.DATE,
     },);
     return Gameplayer;
   };

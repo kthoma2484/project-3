@@ -39,7 +39,6 @@ module.exports = function(passport) {
 
             process.nextTick(function() {
                 console.log('username is:' + username + ' password is: ' + password);
-
                 // find a user whose username is the same as the forms username
                 // we are checking to see if the user trying to login already exists
                 db.Player.findOne({ 
@@ -76,7 +75,6 @@ module.exports = function(passport) {
      
     // LOCAL Registration ============================================================
     passport.use('local-register', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'username',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
@@ -84,7 +82,7 @@ module.exports = function(passport) {
     function(req, username, password, done) {
 
         // asynchronous
-        // User.findOne wont fire unless data is sent back
+        // db.Player.findOne wont fire unless data is sent back
          process.nextTick(function() {
 
         // find a player whose username is the same as the forms username we are checking to see if the player trying to login already exists
@@ -104,7 +102,6 @@ module.exports = function(passport) {
                 // set the player's local credentials
                 newPlayer.username = username;
                 newPlayer.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-                // newPlayer.password = newPlayer.generateHash(password);
 
                 // save the player
                 newPlayer.save(function(err) {

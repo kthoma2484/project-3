@@ -4,9 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from 'react-router-dom'
-
 import Header from './components/Header';
 import Welcome from './pages/Welcome';
 import Instructions from './pages/Instructions';
@@ -15,7 +13,10 @@ import Highscore from './pages/Highscore';
 import Userprofile from './pages/Userprofile';
 import axios from "axios";
 import Login from './components/LoginRegister/Login';
-import './App.css';
+import './App.css'; 
+
+// import firebase from './firebase.js';
+// import { functions } from 'firebase';
 
 const Logo = styled('div')({
   fontSize: '40px',
@@ -44,11 +45,14 @@ class App extends Component {
         email: '',
         singlescore: '',
         multiplayscore: '',
-        loggedIn: false
+        loggedIn: false,
+        // currentPlayers: 0
     };
   };
-  
+
   handleSubmit = event => {
+    event.preventDefault();
+
     console.log("running request")
     var apiBaseUrl = "http://localhost:3001";
     var payload={
@@ -61,28 +65,32 @@ class App extends Component {
       console.log(response);
       console.log("code is: " + response.status)
       if (response.status === 302 || response.status === 200){
-        console.log("Login successfull");
+        console.log("Login successfull");        
         this.setState({ 
           loggedIn : true 
         });
+        this.currentPlayersCounter();
       }
     })
     .catch(function (error) {
       console.log(error);
     });
     console.log("request done");
+
   };
 
   handleClick = event => {
     var apiBaseUrl = "http://localhost:3001";
-    console.log("values",this.state.username,this.state.email,this.state.password);
+    // console.log("values",this.state.username,this.state.email,this.state.password);
     //To be done:check for empty values before hitting submit
     var self = this;
     var payload={
     "username": this.state.username,
-    "email":this.state.email,
+    "email": this.state.email,
     "password":this.state.password
     }
+    console.log(payload)
+    console.log(typeof this.state.email)
     axios.post(apiBaseUrl+'/register', payload)
    .then(function (response) {
      console.log(response);
@@ -91,7 +99,8 @@ class App extends Component {
        var loginscreen=[];
        loginscreen.push(<Login parentContext={this}/>);
        var loginmessage = "Not Registered yet.Go to registration";
-       self.props.parentContext.setState({loginscreen:loginscreen,
+       self.props.parentContext.setState({
+        loginscreen:loginscreen,
        loginmessage:loginmessage,
        buttonLabel:"Register",
        isLogin:true
@@ -111,10 +120,11 @@ class App extends Component {
   };
 
   componentDidUpdate = () => {
-    console.log('state-updated');
+    console.log('state-updated: ', this.state.loggedIn);
   };
 
   render() {
+        
     return (
       <Router>
         <div>
@@ -126,16 +136,19 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route path="/instructions" component={Instructions} />
-              <Route path="/gameplay" render={() => 
-                (this.state.loggedIn ? (<Redirect to ="/userprofile"
-                />) 
-                :
-                (<Gameplay username={this.state.username} password={this.state.password} email={this.state.email} handleInputChange={this.handleInputChange} handleClick={this.handleClick} handleSubmit={this.handleSubmit} />))
-                } />
               <Route path="/highscore" component={Highscore} />
-              <Route path="/userprofile" component={Userprofile} username={this.state.username} password={this.state.password} email={this.state.email}/>
+              
+              <Route path="/gameplay" render={(props) => (
+              this.state.loggedIn ?
+                (<Userprofile  {...props} component={Userprofile} loggedIn={this.state.loggedIn} username={this.state.username} singlescore={this.state.singlescore} multiplayscore={this.state.multiplayscore} currentPlayers={this.state.currentPlayers}handleInputChange={this.handleInputChange} handleClick={this.handleClick} handleSubmit={this.handleSubmit} />)
+                :
+                (<Gameplay {...props} 
+                  loggedIn={this.state.loggedIn} username={this.state.username} password={this.state.password} email={this.state.email} handleInputChange={this.handleInputChange} handleClick={this.handleClick} handleSubmit={this.handleSubmit} />)
+              )}/> 
+            
             </Switch>
           </Content> 
+         
         </div>
       </Router>
     );

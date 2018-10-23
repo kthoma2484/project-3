@@ -1,5 +1,6 @@
 // Load up the player model
 var db = require('../models');
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(app, passport) {
 
@@ -21,7 +22,16 @@ module.exports = function(app, passport) {
             if (err) { 
             return next(err); 
             }
-            return res.redirect('/userprofile');
+
+            
+        let options = {
+            maxAge: 1000 * 60 * 60, // would expire after 15 minutes
+        }
+
+        // Set cookie
+        res.cookie('sessionId', bcrypt.hashSync(Math.floor(Math.random() * 5)) , options) 
+        return res.redirect('/userprofile');
+
         });
         })(req, res, next);
     }));

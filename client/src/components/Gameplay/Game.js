@@ -48,7 +48,7 @@ class Game extends Component {
             {this.props.level === 'default' || this.props.mode === 'default' ?
               null
               :
-              <button style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>  
+              <button id="triviaSearch" style={buttonStyle} label="Create Game" onClick={(event) => this.props.handleSubmit(event)}>Create Game!</button>  
             }
           </div>
         </label>

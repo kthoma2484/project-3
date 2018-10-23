@@ -1,3 +1,5 @@
+var validator = require('validator');
+
 module.exports = function(sequelize, DataTypes) {
 
   var Player = sequelize.define("Player", {
@@ -27,14 +29,6 @@ module.exports = function(sequelize, DataTypes) {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: true,
-        unique: true,
-        validate: {
-            isEmail: {
-            args: true,
-            msg: "Email is not valid"
-          }
-        } 
       },
       singlescore: {
           type: DataTypes.INTEGER,
@@ -50,8 +44,11 @@ module.exports = function(sequelize, DataTypes) {
       },
       timestamp: DataTypes.DATE,
       createdAt: DataTypes.DATE, 
+      updatedAt: DataTypes.DATE,
     });
 
+  validator.isEmail('myemail@email.com');
+  
   return Player;
-  };
+};
   

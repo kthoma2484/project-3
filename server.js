@@ -1,4 +1,5 @@
 require("dotenv").config();
+const admin = require('firebase-admin');
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -24,8 +25,16 @@ db.sequelize.sync().then(function() {
 // pass passport for configuration
 require('./server/config/passport')(passport); 
 
+// // initialize account for Firebase
+// var serviceAccount = require('./server/trivia-challenger-firebase-adminsdk-gvkp1-e5e749f5db.json');
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: 'https://trivia-challenger.firebaseio.com'
+// });
+
 // Set up express application
-app.use(cookieParser('keyboard cat')); //read cookies (needed for auth)
+app.use(cookieParser()); //read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

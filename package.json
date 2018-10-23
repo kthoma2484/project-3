@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.0.1",
+    "firebase": "^5.5.5",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "emotion": "^9.2.10",
     "express": "^4.15.4",
     "express-session": "^1.15.6",
+    "firebase-admin": "^6.0.0",
     "fs": "0.0.1-security",
     "if-env": "^1.0.4",
     "material-ui": "^0.20.2",
@@ -39,9 +41,15 @@
     "react-bootstrap": "^0.32.4",
     "react-emotion": "^9.2.10",
     "react-particles-js": "^2.3.0",
+    "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.1.8",
     "react-router-dom": "^4.3.1",
     "react-tap-event-plugin": "^3.0.3",
+    "redux": "^4.0.1",
+    "redux-firestore": "^0.5.8",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^4.39.0",
+    "validator": "^10.8.0",
     "webfontloader": "^1.6.28"
   }
 }
