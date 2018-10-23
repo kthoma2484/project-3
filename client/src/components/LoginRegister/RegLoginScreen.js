@@ -28,6 +28,7 @@ class RegLoginScreen extends Component {
     };
   };
   
+  // Click handler switches between the registration and login page
   handleClick(event){
     if(this.state.isLogin){
       this.setState({

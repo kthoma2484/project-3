@@ -8,11 +8,6 @@ const LogoutWrapper = styled('div')({
     justifyContent: 'center'
 });
 
-const buttonStyle = {
-  color: 'darkblue',
-  margin: 15,
-};
-
 const underline = {
   textDecorationLine: 'underline'
 };

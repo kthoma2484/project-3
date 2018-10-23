@@ -15,9 +15,6 @@ import axios from "axios";
 import Login from './components/LoginRegister/Login';
 import './App.css'; 
 
-// import firebase from './firebase.js';
-// import { functions } from 'firebase';
-
 const Logo = styled('div')({
   fontSize: '40px',
   color: "rgba(133, 232, 58, .8)",
@@ -46,7 +43,6 @@ class App extends Component {
         singlescore: '',
         multiplayscore: '',
         loggedIn: false,
-        // currentPlayers: 0
     };
   };
 
@@ -69,20 +65,17 @@ class App extends Component {
         this.setState({ 
           loggedIn : true 
         });
-        this.currentPlayersCounter();
       }
     })
     .catch(function (error) {
       console.log(error);
     });
     console.log("request done");
-
   };
 
   handleClick = event => {
     var apiBaseUrl = "http://localhost:3001";
     // console.log("values",this.state.username,this.state.email,this.state.password);
-    //To be done:check for empty values before hitting submit
     var self = this;
     var payload={
     "username": this.state.username,

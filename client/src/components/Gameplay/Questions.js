@@ -9,6 +9,7 @@ const formStyle = {
 
 class Questions extends Component {
 
+    //Map through trivia question responses to join response arrays for the correct and wrong responses into a single response array. This will allow for the questions to be randomly distributed within each question 
     questions = this.props.questions.map((question, i) => {
         const incorrectAnswers = question.incorrect_answers.map(answer => ({ text: answer, value: 'wrong', selected: false }))
         const correctAnswer = { text: question.correct_answer, value: 'correct', selected: false }
@@ -18,7 +19,7 @@ class Questions extends Component {
         
         question.answers = answers
         return question
-    })
+    });
 
   render() {
 

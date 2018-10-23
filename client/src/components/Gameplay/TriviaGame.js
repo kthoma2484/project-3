@@ -13,7 +13,7 @@ const TriviaWrapper = styled('div')({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-})
+});
 
 const buttonStyle = {
     color: 'darkblue',
@@ -29,9 +29,6 @@ class TriviaGame extends Component {
         } else {
             this.props.updateScore(false)
         }
-       // const value = ta
-       // this.setState({value: event.target.value});
-        //this.activeGame(value);
     };
 
     // activeGame = value => {

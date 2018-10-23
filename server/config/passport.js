@@ -81,8 +81,7 @@ module.exports = function(passport) {
     },
     function(req, username, password, done) {
 
-        // asynchronous
-        // db.Player.findOne wont fire unless data is sent back
+        // asynchronous - db.Player.findOne wont fire unless data is sent back
          process.nextTick(function() {
 
         // find a player whose username is the same as the forms username we are checking to see if the player trying to login already exists

@@ -7,8 +7,6 @@ import SingleTriviaSearch from "../components/Gameplay/SingleTriviaSearch";
 import MultiTriviaSearch from "../components/Gameplay/MultiTriviaSearch";
 import TriviaGame from "../components/Gameplay/TriviaGame";
 import API from "../utils/API";
-import { connect } from 'react-redux'
-import { createPlayer } from '../store/actions/playerActions'
 
 const UserWrapper = styled('div')({
     display: 'flex',
@@ -20,19 +18,6 @@ const UserWrapper = styled('div')({
     margin: "0 auto",
     maxWidth: "800px",
 });
-
-
-// const Footer = styled('div')({
-//     fontSize: '24px',
-//     color: "rgba(133, 232, 58, .8)",
-//     boxShadow: '5px 5px solid black',
-//     margin: 10,
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif',
-//     marginBottom: '10'
-// });
 
 const divStyle = {
     margin: '20px',
@@ -56,6 +41,7 @@ class Userprofile extends Component {
         this.gameCreated = false
         this.state = {
           isloggedin: true,
+          logout: false,
           username: "",
           categories: [
             {"id": 9, "name": "General Knowledge"},
@@ -163,7 +149,6 @@ class Userprofile extends Component {
         if (event.target.id === 'finishTrivia') {
         console.log('singlescore:', this.state.singlescore);
         // console.log('multiplayscore:', this.state.multiplayscore);
-
         this.setState({
             singlescore: this.state.singlescore + this.state.score
         }) 
@@ -174,9 +159,16 @@ class Userprofile extends Component {
         })  
         this.setRedirect();
         }
+
+        // Logs user out of gameplay
+        if (event.target.id === 'logout') {
+            this.setState({
+                username: "",
+                isloggedin: false
+            })  
+            this.setLogout();
+        }
         
-        //
-        // this.props.createPlayer()
     };  
 
     //===============================================================
@@ -316,33 +308,40 @@ class Userprofile extends Component {
           redirect: true
         })
     }
+
+    setLogout = () => {
+        this.setState({
+            logout: true
+        })
+    }
+
     renderRedirect = () => {
         if (this.state.redirect) {
         return <Redirect to='/userprofile' />
+        }
+        if (this.state.logout) {
+            return <Redirect to='/logout' />
         }
     }
 
     //===============================================================
     // COMPONENT METHODS
     //===============================================================
-    // When this component mounts, search the trivia categories
     componentDidMount = () => {
-        // this.searchTrivia();
-        // this.handleFormSubmit();
+        console.log('initial game state ', this.state);
     };  
 
     componentDidUpdate = () => {
-        console.log(this.state);
+        console.log('curent game state ', this.state);
     };
 
     render() {
-        console.log('!!!!!!!!!', this.props)
         return (
             <div style={divStyle}>
                 <div style={userWelcome}>
                     <h4> 
                     Welcome User <em>{this.props.username}</em>!
-                    <a style={buttonStyle} href="/" className="btn-default btn-sm">Logout</a>
+                    <button id="logout" style={buttonStyle} className="btn-default btn-sm"label="Logout" onClick={(event) => this.props.handleSubmit(event)}>Logout</button>
                     </h4>
                 </div>
                 <UserWrapper> 
@@ -358,17 +357,4 @@ class Userprofile extends Component {
       }
     }
     
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         players: state.players.players
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //         createPlayer: (player) => dispatch(createPlayer(player))
-    //     }
-    // }
-export default 
-// connect(mapStateToProps, mapDispatchToProps)
-(Userprofile)
+export default Userprofile

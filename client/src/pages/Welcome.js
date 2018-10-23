@@ -17,7 +17,7 @@ const divStyle = {
   margin: '20px',
   overflow: 'auto',
   height: '600px'
-}
+};
 
 const Welcome = () => (
   <div style={divStyle}>
@@ -35,4 +35,4 @@ const Welcome = () => (
   </div>
 );
   
-  export default Welcome;
+export default Welcome;

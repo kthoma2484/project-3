@@ -1,9 +1,6 @@
 USE triviagame_db;
 
 INSERT INTO players (playerid,username, password, email, singlescore, multiplayscore, recoveryhash)
-VALUES ("1", "Apple", "apple1", "apple@email.com", "16", "51", "recoveryhash1");
-
-INSERT INTO players (playerid,username, password, email, singlescore, multiplayscore, recoveryhash)
 VALUES ("2", "Pear", "pear1", "pear@email.com", "32", "2", "recoveryhash2");
 
 INSERT INTO players (playerid,username, password, email, singlescore, multiplayscore, recoveryhash)
