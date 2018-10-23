@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport');
-const routes = require("./server/routes");
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
