@@ -50,7 +50,7 @@ class App extends Component {
     event.preventDefault();
 
     console.log("running request")
-    var apiBaseUrl = "http://localhost:3001";
+    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
     var payload={
     "username":this.state.username,
     "password":this.state.password
