@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
         })
         .then((username => {   
             // get the player out of session and pass to template
-            console.log(username.username) 
+            return username.username
         }));
     });
 }
