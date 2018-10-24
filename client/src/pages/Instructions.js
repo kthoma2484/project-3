@@ -10,37 +10,49 @@ const InstructionsWrapper = styled('div')({
     textAlign: 'justify',
     margin: "0 auto",
     maxWidth: "800px",
-    fontSize: '18'
-})
+    fontSize: "30px",
+    '@media (max-width:1020px)': {
+      fontSize: '28px',
+    },
+    '@media (max-width:920px)': {
+      fontSize: '22px',
+    },
+    '@media (max-width:740px)': {
+      fontSize: '18px',
+    },
+    '@media (max-width:580px)': {
+      fontSize: '12px',
+    }
+});
 
 const divStyle = {
   margin: '20px',
   overflow: 'auto',
   height: '700px'
-}
+};
 
 const underline = {
   textDecorationLine: 'underline'
-}
+};
   
 const Instructions = () => (
     <div style={divStyle}>
       <InstructionsWrapper>
-          <h2><em>Single Player Mode and Multi-Player Mode Instructions</em></h2>
-            <h3 style={underline}><b>Normal</b></h3>
+          <p><em>Single Player Mode and Multi-Player Mode Instructions</em></p>
+            <p style={underline}><b>Normal</b></p>
             <ul>
               <li> (Single Player Mode) Player chooses the trivia category.</li>
               <li> (Multi-Player Mode) Each Player chooses a trivia category. The final game is a mix of all categories chosen.</li>
               <li> Questions selected are 'easy' difficulty level.</li>
               <li> Player has a 120 second time limit to complete all questions.</li>
             </ul>
-            <h3 style={underline}><b>Hard</b></h3>
+            <p style={underline}><b>Hard</b></p>
             <ul>
               <li> Game randomly selects trivia category.</li>
               <li> Questions selected are 'medium' difficulty level.</li>
               <li> Player has a starting time limit of 120 seconds to complete all questions. Player is penalized 2 seconds per wrong question answered.</li>
             </ul>
-            <h3 style={underline}><b>Insanity</b></h3>
+            <p style={underline}><b>Insanity</b></p>
             <ul>
               <li> Game randomly selects trivia category.</li>
               <li> Questions selected are 'hard' difficulty level</li>

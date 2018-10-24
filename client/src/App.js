@@ -62,7 +62,7 @@ class App extends Component {
     event.preventDefault();
 
     console.log("running request")
-    var apiBaseUrl = "";
+    var apiBaseUrl = "http://localhost:3001";
     var payload={
     "username":this.state.username,
     "password":this.state.password
@@ -86,7 +86,7 @@ class App extends Component {
   };
 
   handleClick = event => {
-    var apiBaseUrl = "";
+    var apiBaseUrl = "http://localhost:3001";
     // console.log("values",this.state.username,this.state.email,this.state.password);
     var self = this;
     var payload={

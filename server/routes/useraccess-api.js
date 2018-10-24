@@ -23,12 +23,12 @@ module.exports = function(app, passport) {
             return next(err); 
         }
             
-        // let options = {
-        //     maxAge: 1000 * 60 * 60, // would expire after 15 minutes
-        // }
+        let options = {
+            maxAge: 1000 * 60 * 60, // would expire after 15 minutes
+        }
 
-        // // Set cookie
-        // res.cookie('sessionId', bcrypt.hashSync(Math.floor(Math.random() * 5)) , options);
+        // Set cookie
+        res.cookie('sessionId', bcrypt.hashSync(Math.floor(Math.random() * 5)) , options);
 
         return res.redirect('/userprofile');
 

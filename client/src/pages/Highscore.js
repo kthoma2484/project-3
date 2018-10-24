@@ -29,7 +29,7 @@ const Highscore = () => (
     <div style={divStyle}>
     <HighScoreWrapper>
       <div style={innerDiv}>
-      <h3>Single Player High Scores</h3>
+      <p>Single Player High Scores</p>
       <Table responsive>
         <thead>
           <tr>

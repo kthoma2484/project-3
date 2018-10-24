@@ -25,7 +25,7 @@ class Questions extends Component {
 
     return (
         <form  style={formStyle} onSubmit={this.props.handleSubmit}>
-            <h1>Score: { this.props.score }</h1>
+            {/* <h1>Score: { this.props.score }</h1> */}
             {
                 this.questions.map((question, i) => (
                     <label key={i}>
