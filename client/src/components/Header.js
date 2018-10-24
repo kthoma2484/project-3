@@ -10,8 +10,20 @@ const HeaderWrapper = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  fontSize: 20,
-  marginBottom: 20
+  marginBottom: 20,
+  fontSize: '30px',
+  '@media (max-width:1020px)': {
+    fontSize: '27px',
+  },
+  '@media (max-width:920px)': {
+    fontSize: '24px',
+  },
+  '@media (max-width:740px)': {
+    fontSize: '20px',
+  },
+  '@media (max-width:580px)': {
+    fontSize: '12px',
+  }
 })
 
 const Header = () => (

@@ -16,7 +16,7 @@ import Login from './components/LoginRegister/Login';
 import './App.css'; 
 
 const Logo = styled('div')({
-  fontSize: '40px',
+  fontSize: '60px',
   color: "rgba(133, 232, 58, .8)",
   boxShadow: '5px 5px solid black',
   margin: 10,
@@ -24,11 +24,23 @@ const Logo = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   fontFamily: 'Notable, Cinzel, Archivo Black, sans-serif',
-  marginBottom: '20'
+  marginBottom: '20',
+  '@media (max-width:1020px)': {
+    fontSize: '50px',
+  },
+  '@media (max-width:920px)': {
+    fontSize: '40px',
+  },
+  '@media (max-width:740px)': {
+    fontSize: '30px',
+  },
+  '@media (max-width:580px)': {
+    fontSize: '20px',
+  }
 });
 
 const Content = styled('div')({
-  marginTop: 10
+  marginTop: 10,
 });
 
 class App extends Component {
@@ -46,11 +58,12 @@ class App extends Component {
     };
   };
 
+
   handleSubmit = event => {
     event.preventDefault();
 
     console.log("running request")
-    var apiBaseUrl = "http://localhost:3001";
+    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
     var payload={
     "username":this.state.username,
     "password":this.state.password

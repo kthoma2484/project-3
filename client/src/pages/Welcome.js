@@ -11,6 +11,19 @@ const WelcomeWrapper = styled('div')({
     fontSize: '18',
     margin: "0 auto",
     maxWidth: "800px",
+    fontSize: "30",
+    '@media (max-width:1020px)': {
+      fontSize: '27px',
+    },
+    '@media (max-width:920px)': {
+      fontSize: '24px',
+    },
+    '@media (max-width:740px)': {
+      fontSize: '20px',
+    },
+    '@media (max-width:580px)': {
+      fontSize: '12px',
+    }
 });
 
 const divStyle = {
