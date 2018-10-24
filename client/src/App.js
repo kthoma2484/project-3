@@ -58,12 +58,11 @@ class App extends Component {
     };
   };
 
-
   handleSubmit = event => {
     event.preventDefault();
 
     console.log("running request")
-    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
+    var apiBaseUrl = "";
     var payload={
     "username":this.state.username,
     "password":this.state.password
@@ -87,7 +86,7 @@ class App extends Component {
   };
 
   handleClick = event => {
-    var apiBaseUrl = "https://fast-dusk-26414.herokuapp.com";
+    var apiBaseUrl = "";
     // console.log("values",this.state.username,this.state.email,this.state.password);
     var self = this;
     var payload={
@@ -95,8 +94,8 @@ class App extends Component {
     "email": this.state.email,
     "password":this.state.password
     }
-    console.log(payload)
-    console.log(typeof this.state.email)
+    // console.log(payload)
+    // console.log(typeof this.state.email)
     axios.post(apiBaseUrl+'/register', payload)
    .then(function (response) {
      console.log(response);

@@ -21,15 +21,15 @@ module.exports = function(app, passport) {
         req.logIn(user, function(err) {
             if (err) { 
             return next(err); 
-            }
-
+        }
             
         let options = {
             maxAge: 1000 * 60 * 60, // would expire after 15 minutes
         }
 
         // Set cookie
-        res.cookie('sessionId', bcrypt.hashSync(Math.floor(Math.random() * 5)) , options) 
+        res.cookie('sessionId', bcrypt.hashSync(Math.floor(Math.random() * 5)) , options);
+        
         return res.redirect('/userprofile');
 
         });

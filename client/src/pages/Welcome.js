@@ -8,18 +8,17 @@ const WelcomeWrapper = styled('div')({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'justify',
-    fontSize: '18',
     margin: "0 auto",
     maxWidth: "800px",
-    fontSize: "30",
+    fontSize: "30px",
     '@media (max-width:1020px)': {
-      fontSize: '27px',
+      fontSize: '28px',
     },
     '@media (max-width:920px)': {
-      fontSize: '24px',
+      fontSize: '22px',
     },
     '@media (max-width:740px)': {
-      fontSize: '20px',
+      fontSize: '18px',
     },
     '@media (max-width:580px)': {
       fontSize: '12px',
@@ -35,9 +34,9 @@ const divStyle = {
 const Welcome = () => (
   <div style={divStyle}>
     <WelcomeWrapper>
-      <h2>
+      <p>
       <em>Welcome to Trivia Challenger!</em>
-      </h2>
+      </p>
       <br/>
       <p> This is a game to test players knowledge, focus, and ability to think fast and accurately in the face of a challenge - a trivia challenge. The game can be played in single mode on three challenge levels - normal, hard, and insantity
       </p>

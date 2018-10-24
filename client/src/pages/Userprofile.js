@@ -14,9 +14,21 @@ const UserWrapper = styled('div')({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'justify',
-    fontSize: '18',
     margin: "0 auto",
     maxWidth: "800px",
+    fontSize: "30px",
+    '@media (max-width:1020px)': {
+      fontSize: '28px',
+    },
+    '@media (max-width:920px)': {
+      fontSize: '22px',
+    },
+    '@media (max-width:740px)': {
+      fontSize: '18px',
+    },
+    '@media (max-width:580px)': {
+      fontSize: '12px',
+    }
 });
 
 const divStyle = {
@@ -27,7 +39,6 @@ const divStyle = {
 
 const userWelcome = {
     textAlign: 'left',
-    fontSize: '12px'
 };
 
 const buttonStyle = {
@@ -339,10 +350,10 @@ class Userprofile extends Component {
         return (
             <div style={divStyle}>
                 <div style={userWelcome}>
-                    <h4> 
+                    <p> 
                     Welcome User <em>{this.props.username}</em>!
                     <button id="logout" style={buttonStyle} className="btn-default btn-sm"label="Logout" onClick={(event) => this.props.handleSubmit(event)}>Logout</button>
-                    </h4>
+                    </p>
                 </div>
                 <UserWrapper> 
                   {this.gameCreated ? 
