@@ -7,10 +7,23 @@ const HighScoreWrapper = styled('div')({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     textAlign: 'justify',
     margin: "0 auto",
-    maxWidth: "800px",
-    fontSize: '14'
+    maxWidth: "1200px",
+    fontSize: "30px",
+    '@media (max-width:1020px)': {
+      fontSize: '28px',
+    },
+    '@media (max-width:920px)': {
+      fontSize: '22px',
+    },
+    '@media (max-width:740px)': {
+      fontSize: '18px',
+    },
+    '@media (max-width:580px)': {
+      fontSize: '12px',
+    }
 });
   
 const divStyle = {
@@ -28,7 +41,7 @@ const innerDiv = {
 const Highscore = () => (
     <div style={divStyle}>
     <HighScoreWrapper>
-      <div style={innerDiv}>
+      <div>
       <p>Single Player High Scores</p>
       <Table responsive>
         <thead>
@@ -69,7 +82,7 @@ const Highscore = () => (
       </div>
       <br/>
       <div style={innerDiv}>
-      <h3>Multi-Player High Scores</h3>
+      <p>Multi-Player High Scores</p>
       <Table responsive>
         <thead>
           <tr>

@@ -3,14 +3,14 @@ import styled from 'react-emotion'
 
 
 const InstructionsWrapper = styled('div')({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    textAlign: 'justify',
-    margin: "0 auto",
-    maxWidth: "800px",
-    fontSize: "30px",
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  textAlign: 'justify',
+  margin: "0 auto",
+  maxWidth: "1200px",
+  fontSize: "30px",
     '@media (max-width:1020px)': {
       fontSize: '28px',
     },
