@@ -100,7 +100,7 @@ module.exports = function(passport) {
 
                 // set the player's local credentials
                 newPlayer.username = username;
-                newPlayer.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+                newPlayer.password = bcrypt.hashSync(password, bcrypt.genSaltSync(1), null);
 
                 // save the player
                 newPlayer.save(function(err) {
