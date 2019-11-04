@@ -49,7 +49,7 @@
     "redux": "^4.0.1",
     "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^4.39.0",
+    "sequelize": "^5.15.1",
     "validator": "^10.8.0",
     "webfontloader": "^1.6.28"
   }
